@@ -1,0 +1,30 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int tamanio = 20;
+    int arrai[tamanio];
+    int frecuencia[tamanio];
+    bool contado[tamanio];
+
+    for (int i = 0; i < tamanio; i++) {
+        cout << "Ingrese un numero: ";
+        cin >> arrai[i];
+        contado[i] = false;
+    }
+
+    for (int i = 0; i < tamanio; i++) {
+        if (!contado[i]) {
+            int contador = 1;
+            for (int j = i + 1; j < tamanio; j++) {
+                if (arrai[i] == arrai[j]) {
+                    contador++;
+                    contado[j] = true;
+                }
+            }
+            cout << "El numero " << arrai[i] << " aparece " << contador << " veces" << endl;
+        }
+    }
+
+    return 0;
+}
