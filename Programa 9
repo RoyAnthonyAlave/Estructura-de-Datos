@@ -1,0 +1,29 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int tamanio = 10;
+    int arrai1[tamanio];
+    int arrai2[tamanio];
+    int iguales = 0;
+
+    for (int i = 0; i < tamanio; i++) {
+        cout << "Ingrese el elemento " << i + 1 << " del primer arreglo: ";
+        cin >> arrai1[i];
+    }
+
+    for (int i = 0; i < tamanio; i++) {
+        cout << "Ingrese el elemento " << i + 1 << " del segundo arreglo: ";
+        cin >> arrai2[i];
+    }
+
+    for (int i = 0; i < tamanio; i++) {
+        if (arrai1[i] == arrai2[i]) {
+            iguales++;
+        }
+    }
+
+    cout << "Cantidad de elementos iguales en la misma posicion: " << iguales << endl;
+
+    return 0;
+}
