@@ -1,0 +1,28 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    int tamanio = 30;
+    int suma = 0;
+    int arrai[tamanio];
+
+    for (int i = 0; i < tamanio; i++) {
+        cout << "Ingresa un numero: ";
+        cin >> arrai[i];
+        suma += arrai[i];
+    }
+
+    int promedio = suma / tamanio;
+
+    int encima = 0;
+    for (int i = 0; i < tamanio; i++) {
+        if (arrai[i] > promedio) {
+            encima++;
+        }
+    }
+
+    cout << "Promedio: " << promedio << endl;
+    cout << "Estudiantes por encima del promedio: " << encima << endl;
+
+    return 0;
+}
