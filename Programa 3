@@ -1,0 +1,16 @@
+#include <iostream>
+using namespace std;
+
+int main() {
+    float radio, area;
+    float pi = 3.14;
+
+    cout << "Ingrese el radio del círculo: ";
+    cin >> radio;
+
+    area = pi * (radio * radio);
+
+    cout << "El área del círculo es: " << area << endl;
+
+    return 0;
+}
