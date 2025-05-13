@@ -1,0 +1,173 @@
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+struct VariableEstadistica {
+    char nombre[30];
+    char tipo[20];
+    char unidad[20];
+} variables[3];
+
+struct IDE {
+    char nombre[30];
+    char lenguajeSoportado[30];
+    char licencia[20];
+} ides[3];
+
+struct MonitorExterno {
+    char marca[30];
+    char resolucion[20];
+    float pulgadas;
+    int precio;
+} monitores[3];
+
+struct DiscoDuro {
+    char tipo[20];
+    char capacidad[20];
+    char marca[20];
+    int precio;
+} discos[3];
+
+struct Procesador {
+    char modelo[30];
+    char nucleos[10];
+    char velocidad[20];
+    int precio;
+} procesadores[3];
+
+struct USB {
+    char marca[20];
+    char version[10];
+    char capacidad[20];
+} usbs[3];
+
+struct CableUTP {
+    char categoria[10];
+    char velocidad[20];
+    char marca[20];
+    int precio;
+} cables[3];
+
+struct Laptop {
+    char almacenamiento[20];
+    char procesador[20];
+    char ram[20];
+    int precio;
+    char marca[20];
+} laptops[3];
+
+int main() {
+    int opcion;
+
+    cout << "Seleccione una opcion para ingresar datos:\n";
+    cout << "(1) Variable Estadistica\n";
+    cout << "(2) IDE\n";
+    cout << "(3) Monitor Externo\n";
+    cout << "(4) Disco Duro\n";
+    cout << "(5) Procesador\n";
+    cout << "(6) USB\n";
+    cout << "(7) Cable UTP\n";
+    cout << "(8) Laptop\n";
+    cin >> opcion;
+
+    switch(opcion) {
+        case 1:
+            for(int i = 0; i < 3; i++) {
+                cout << "Nombre de variable estadistica " << i+1 << ": ";
+                cin >> variables[i].nombre;
+                cout << "Tipo (cualitativa/cuantitativa): ";
+                cin >> variables[i].tipo;
+                cout << "Unidad: ";
+                cin >> variables[i].unidad;
+            }
+            break;
+        case 2:
+            for(int i = 0; i < 3; i++) {
+                cout << "Nombre del IDE " << i+1 << ": ";
+                cin >> ides[i].nombre;
+                cout << "Lenguaje soportado: ";
+                cin >> ides[i].lenguajeSoportado;
+                cout << "Licencia (libre/pago): ";
+                cin >> ides[i].licencia;
+            }
+            break;
+        case 3:
+            for(int i = 0; i < 3; i++) {
+                cout << "Marca del monitor " << i+1 << ": ";
+                cin >> monitores[i].marca;
+                cout << "Resolución: ";
+                cin >> monitores[i].resolucion;
+                cout << "Pulgadas: ";
+                cin >> monitores[i].pulgadas;
+                cout << "Precio: ";
+                cin >> monitores[i].precio;
+            }
+            break;
+        case 4:
+            for(int i = 0; i < 3; i++) {
+                cout << "Tipo de disco duro " << i+1 << ": ";
+                cin >> discos[i].tipo;
+                cout << "Capacidad: ";
+                cin >> discos[i].capacidad;
+                cout << "Marca: ";
+                cin >> discos[i].marca;
+                cout << "Precio: ";
+                cin >> discos[i].precio;
+            }
+            break;
+        case 5:
+            for(int i = 0; i < 3; i++) {
+                cout << "Modelo de procesador " << i+1 << ": ";
+                cin >> procesadores[i].modelo;
+                cout << "Núcleos: ";
+                cin >> procesadores[i].nucleos;
+                cout << "Velocidad (GHz): ";
+                cin >> procesadores[i].velocidad;
+                cout << "Precio: ";
+                cin >> procesadores[i].precio;
+            }
+            break;
+        case 6:
+            for(int i = 0; i < 3; i++) {
+                cout << "Marca USB " << i+1 << ": ";
+                cin >> usbs[i].marca;
+                cout << "Versión: ";
+                cin >> usbs[i].version;
+                cout << "Capacidad: ";
+                cin >> usbs[i].capacidad;
+            }
+            break;
+        case 7:
+            for(int i = 0; i < 3; i++) {
+                cout << "Categoría cable UTP " << i+1 << ": ";
+                cin >> cables[i].categoria;
+                cout << "Velocidad: ";
+                cin >> cables[i].velocidad;
+                cout << "Marca: ";
+                cin >> cables[i].marca;
+                cout << "Precio: ";
+                cin >> cables[i].precio;
+            }
+            break;
+        case 8:
+            for(int i = 0; i < 3; i++) {
+                cout << "Almacenamiento laptop " << i+1 << ": ";
+                cin >> laptops[i].almacenamiento;
+                cout << "Procesador: ";
+                cin >> laptops[i].procesador;
+                cout << "RAM: ";
+                cin >> laptops[i].ram;
+                cout << "Precio: ";
+                cin >> laptops[i].precio;
+                cout << "Marca: ";
+                cin >> laptops[i].marca;
+            }
+            break;
+        default:
+            cout << "Opción no válida" << endl;
+            break;
+    }
+
+    system("pause");
+    return 0;
+}
