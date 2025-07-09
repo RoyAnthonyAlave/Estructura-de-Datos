@@ -1,0 +1,479 @@
+//3.1
+#include <iostream>
+#include <chrono>
+using namespace std;
+using namespace chrono;
+
+void ejemplo_O1() {
+    int a = 5, b = 10;
+    a++;
+    b++;
+    int c = a + b;
+    cout << "Resultado O(1): " << c << endl;
+}
+
+void ejemplo_On(int n) {
+    int sum = 0;
+    for (int i = 1; i <= n; i++) {
+        sum += i;
+    }
+    cout << "Suma O(n): " << sum << endl;
+}
+
+void ejemplo_On2(int n) {
+    int count = 0;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            count++;
+        }
+    }
+    cout << "Conteo O(n^2): " << count << endl;
+}
+
+void ejemplo_On_variantes(int n) {
+    int count1 = 0, count2 = 0, count3 = 0;
+    
+    for (int i = 1; i <= 3*n; i++) count1++;
+    
+    for (int i = 1; i <= n+5; i++) count2++;
+    
+    for (int i = 1; i <= n; i += 2) count3++;
+    
+    cout << "Variantes O(n): " << count1 << ", " << count2 << ", " << count3 << endl;
+}
+
+void ejemplo_On2_triangular(int n) {
+    int count = 0;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= i; j++) {
+            count++;
+        }
+    }
+    cout << "Suma triangular O(n^2): " << count << endl;
+}
+
+void ejemplo_fases(int n) {
+    int count1 = 0, count2 = 0, count3 = 0;
+    
+    for (int i = 1; i <= n; i++) count1++;
+    
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= n; j++) {
+            count2++;
+        }
+    }
+    
+    for (int i = 1; i <= n; i++) count3++;
+    
+    cout << "Fases O(n^2): " << count2 << endl;
+}
+
+void ejemplo_Onm(int n, int m) {
+    int count = 0;
+    for (int i = 1; i <= n; i++) {
+        for (int j = 1; j <= m; j++) {
+            count++;
+        }
+    }
+    cout << "Conteo O(nm): " << count << endl;
+}
+
+void f_recursiva(int n) {
+    if (n == 0) return;
+    f_recursiva(n-1);
+}
+
+void g_recursiva(int n) {
+    if (n == 0) return;
+    g_recursiva(n-1);
+    g_recursiva(n-1);
+}
+
+int main() {
+    int opcion, n, m;
+    
+    cout << "EJEMPLOS DE COMPLEJIDAD TEMPORAL:\n";
+    cout << "1. O(1) - Operaciones basicas\n";
+    cout << "2. O(n) - Bucle simple\n";
+    cout << "3. O(n^2) - Bucles anidados\n";
+    cout << "4. O(n) - Variantes (3n, n+5, n/2)\n";
+    cout << "5. O(n^2) - Suma triangular\n";
+    cout << "6. O(n^2) - Fases consecutivas\n";
+    cout << "7. O(nm) - Dos factores\n";
+    cout << "8. O(n) - Recursion simple\n";
+    cout << "9. O(2^n) - Recursion exponencial\n";
+    cout << "Seleccione opcion: ";
+    cin >> opcion;
+    
+    auto inicio = high_resolution_clock::now();
+    
+    switch(opcion) {
+        case 1:
+            ejemplo_O1();
+            break;
+        case 2:
+            cout << "Ingrese n: ";
+            cin >> n;
+            ejemplo_On(n);
+            break;
+        case 3:
+            cout << "Ingrese n: ";
+            cin >> n;
+            ejemplo_On2(n);
+            break;
+        case 4:
+            cout << "Ingrese n: ";
+            cin >> n;
+            ejemplo_On_variantes(n);
+            break;
+        case 5:
+            cout << "Ingrese n: ";
+            cin >> n;
+            ejemplo_On2_triangular(n);
+            break;
+        case 6:
+            cout << "Ingrese n: ";
+            cin >> n;
+            ejemplo_fases(n);
+            break;
+        case 7:
+            cout << "Ingrese n y m: ";
+            cin >> n >> m;
+            ejemplo_Onm(n, m);
+            break;
+        case 8:
+            cout << "Ingrese n: ";
+            cin >> n;
+            f_recursiva(n);
+            cout << "Recursion O(n) completada\n";
+            break;
+        case 9:
+            cout << "Ingrese n (MAX 25): ";
+            cin >> n;
+            if(n > 25) {
+                cout << "n demasiado grande para O(2^n)!\n";
+                return 1;
+            }
+            g_recursiva(n);
+            cout << "Recursion O(2^n) completada\n";
+            break;
+        default:
+            cout << "Opcion invalida!\n";
+            return 1;
+    }
+    
+    auto fin = high_resolution_clock::now();
+    auto duracion = duration_cast<milliseconds>(fin - inicio);
+    
+    cout << "Tiempo ejecucion: " << duracion.count() << " ms\n";
+    return 0;
+}
+
+
+
+//3.2
+#include <iostream>
+#include <vector>
+#include <algorithm>
+#include <climits>
+using namespace std;
+
+int max_subarray_brute_force(vector<int>& arr) {
+    int n = arr.size();
+    int best = 0;
+    for (int a = 0; a < n; a++) {
+        for (int b = a; b < n; b++) {
+            int sum = 0;
+            for (int k = a; k <= b; k++) {
+                sum += arr[k];
+            }
+            best = max(best, sum);
+        }
+    }
+    return best;
+}
+
+int max_subarray_optimized(vector<int>& arr) {
+    int n = arr.size();
+    int best = 0;
+    for (int a = 0; a < n; a++) {
+        int sum = 0;
+        for (int b = a; b < n; b++) {
+            sum += arr[b];
+            best = max(best, sum);
+        }
+    }
+    return best;
+}
+
+int max_subarray_kadane(vector<int>& arr) {
+    int best = 0;
+    int current_sum = 0;
+    for (int num : arr) {
+        current_sum = max(num, current_sum + num);
+        best = max(best, current_sum);
+    }
+    return best;
+}
+
+int main() {
+    vector<int> arr = {-1, 2, 4, -3, 5, 2, -5, 2};
+    
+    cout << "Suma maxima de subarreglo (O(n^3)): " 
+         << max_subarray_brute_force(arr) << endl;
+         
+    cout << "Suma maxima de subarreglo (O(n^2)): " 
+         << max_subarray_optimized(arr) << endl;
+         
+    cout << "Suma maxima de subarreglo (O(n)): " 
+         << max_subarray_kadane(arr) << endl;
+
+    return 0;
+}
+
+
+
+//3.2.Queens
+#include <iostream>
+#include <vector>
+#include <cmath>
+using namespace std;
+
+long long two_queens_brute_force(int n) {
+    long long count = 0;
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            for (int k = 0; k < n; k++) {
+                for (int l = 0; l < n; l++) {
+                    if (i == k && j == l) continue;
+                    
+                    if (i != k && j != l && abs(i - k) != abs(j - l)) {
+                        count++;
+                    }
+                }
+            }
+        }
+    }
+    return count / 2;
+}
+
+long long two_queens_recursive(int n) {
+    if (n <= 2) return 0;
+    return two_queens_recursive(n - 1) + 2LL * (n - 1) * (n - 1) * (n - 2);
+}
+
+long long two_queens_closed_form(int n) {
+    if (n < 3) return 0;
+    return (3LL * n * n * n * n - 10LL * n * n * n + 9LL * n * n - 2LL * n) / 6;
+}
+
+long long two_queens_attacks(int n) {
+    long long total = n * n * (n * n - 1LL) / 2;
+    
+    long long attacking = 0;
+    
+    attacking += n * n * (n - 1LL); 
+    for (int i = 1; i <= n; i++) {
+        attacking += 2LL * (i - 1) * (i - 1) * (i - 1);
+    }
+    
+    return total - attacking;
+}
+
+int main() {
+    cout << "n=3 (Fuerza bruta): " << two_queens_brute_force(3) << endl;   
+    cout << "n=3 (Recursivo): " << two_queens_recursive(3) << endl;        
+    cout << "n=3 (Formula cerrada): " << two_queens_closed_form(3) << endl;
+    cout << "n=4 (Formula cerrada): " << two_queens_closed_form(4) << endl;
+    
+    // Para valores mayores
+    cout << "\nPara tableros grandes:\n";
+    cout << "n=10 (Formula cerrada): " << two_queens_closed_form(10) << endl;
+    cout << "n=100 (Formula cerrada): " << two_queens_closed_form(100) << endl;
+    
+    return 0;
+}
+
+
+
+//3.3
+#include <iostream>
+#include <vector>
+#include <chrono>
+using namespace std;
+using namespace std::chrono;
+
+bool search_basic(vector<int>& arr, int x) {
+    bool found = false;
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] == x) found = true;
+    }
+    return found;
+}
+
+bool search_optimized(vector<int>& arr, int x) {
+    bool found = false;
+    for (int i = 0; i < arr.size(); i++) {
+        if (arr[i] == x) {
+            found = true;
+            break;
+        }
+    }
+    return found;
+}
+
+bool search_sentinel(vector<int>& arr, int x) {
+    arr.push_back(x);
+    int i = 0;
+    while (arr[i] != x) i++;
+    arr.pop_back();
+    return i < arr.size();
+}
+
+void test_search() {
+    vector<int> arr(10000000, 0);
+    arr.back() = 1;
+
+    auto start = high_resolution_clock::now();
+    bool r1 = search_basic(arr, 1);
+    auto end = high_resolution_clock::now();
+    cout << "Básica: " << duration_cast<milliseconds>(end - start).count() << " ms\n";
+
+    start = high_resolution_clock::now();
+    bool r2 = search_optimized(arr, 1);
+    end = high_resolution_clock::now();
+    cout << "Optimizada: " << duration_cast<milliseconds>(end - start).count() << " ms\n";
+
+    start = high_resolution_clock::now();
+    bool r3 = search_sentinel(arr, 1);
+    end = high_resolution_clock::now();
+    cout << "Centinela: " << duration_cast<milliseconds>(end - start).count() << " ms\n";
+}
+int collatz_basic(int n) {
+    if (n % 2 == 0) 
+        return n / 2;
+    else 
+        return 3 * n + 1;
+}
+
+int collatz_optimized(int n) {
+    if ((n & 1) == 0)
+        return n >> 1;
+    else 
+        return (n << 1) + n + 1;
+}
+
+void test_collatz() {
+    int sum = 0;
+    
+    auto start = high_resolution_clock::now();
+    for (int i = 1; i <= 100000000; i++) {
+        sum += collatz_basic(i);
+    }
+    auto end = high_resolution_clock::now();
+    cout << "Collatz básico: " << duration_cast<milliseconds>(end - start).count() << " ms\n";
+
+    start = high_resolution_clock::now();
+    for (int i = 1; i <= 100000000; i++) {
+        sum += collatz_optimized(i);
+    }
+    end = high_resolution_clock::now();
+    cout << "Collatz optimizado: " << duration_cast<milliseconds>(end - start).count() << " ms\n";
+    
+    cout << "Suma: " << sum << "\n";
+}
+void test_cache() {
+    const int n = 1000;
+    vector<vector<int>> matrix(n, vector<int>(n, 1));
+    long long sum = 0;
+
+    auto start = high_resolution_clock::now();
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            sum += matrix[i][j];
+        }
+    }
+    auto end = high_resolution_clock::now();
+    cout << "Por filas: " << duration_cast<microseconds>(end - start).count() << " µs\n";
+
+    start = high_resolution_clock::now();
+    for (int j = 0; j < n; j++) {
+        for (int i = 0; i < n; i++) {
+            sum += matrix[i][j];
+        }
+    }
+    end = high_resolution_clock::now();
+    cout << "Por columnas: " << duration_cast<microseconds>(end - start).count() << " µs\n";
+    
+    cout << "Suma: " << sum << "\n";
+}
+const long long M = 1000000007;
+
+long long factorial_basic(int n) {
+    long long f = 1;
+    for (int i = 1; i <= n; i++) {
+        f = (f * i) % M;
+    }
+    return f;
+}
+
+long long factorial_optimized(int n) {
+    long long f1 = 1, f2 = 1;
+    for (int i = 1; i <= n; i += 2) {
+        f1 = (f1 * i) % M;
+        if (i + 1 <= n) {
+            f2 = (f2 * (i + 1)) % M;
+        }
+    }
+    return (f1 * f2) % M;
+}
+
+void test_factorial() {
+    const int n = 10000000;
+    
+    auto start = high_resolution_clock::now();
+    long long r1 = factorial_basic(n);
+    auto end = high_resolution_clock::now();
+    cout << "Factorial básico: " << duration_cast<milliseconds>(end - start).count() << " ms\n";
+
+    start = high_resolution_clock::now();
+    long long r2 = factorial_optimized(n);
+    end = high_resolution_clock::now();
+    cout << "Factorial optimizado: " << duration_cast<milliseconds>(end - start).count() << " ms\n";
+    
+    cout << "Resultados: " << r1 << " vs " << r2 << "\n";
+}
+void dead_code() {
+    int s = 0;
+    for (int i = 1; i <= 100000000; i++) {
+        s += i;
+    }
+    cout << "Resultado: " << s << "\n";
+}
+
+#pragma GCC target ("arch=haswell")
+void test_popcount() {
+    int sum = 0;
+    for (int i = 0; i < 100000000; i++) {
+        sum += __builtin_popcount(i);
+    }
+    cout << "Total bits: " << sum << "\n";
+}
+int main() {
+    cout << "=== Búsqueda en Arreglo ===\n";
+    test_search();
+    
+    cout << "\n=== Operaciones Collatz ===\n";
+    test_collatz();
+    
+    cout << "\n=== Acceso a Memoria ===\n";
+    test_cache();
+    
+    cout << "\n=== Paralelismo Implícito ===\n";
+    test_factorial();
+    
+    cout << "\n=== Popcount ===\n";
+    test_popcount();
+    
+    return 0;
+}
