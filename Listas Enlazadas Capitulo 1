@@ -1,0 +1,40 @@
+#include <iostream>
+#include <vector>
+#include <unordered_map>
+#include <string>
+
+using namespace std;
+
+class GrafoCursos {
+private:
+    unordered_map<string, vector<string>> adyacencia;
+
+public:
+    void agregarRelacion(const string& curso, const string& relacionadoCon) {
+        adyacencia[curso].push_back(relacionadoCon);
+    }
+
+    // Mostrar todas las relaciones
+    void mostrarRelaciones() {
+        cout << "Relaciones entre cursos:\n";
+        for (auto& par : adyacencia) {
+            cout << par.first << " --> ";
+            for (auto& relacionado : par.second) {
+                cout << relacionado << ", ";
+            }
+            cout << endl;
+        }
+    }
+};
+
+int main() {
+    GrafoCursos grafo;
+
+    grafo.agregarRelacion("ADA", "Estructura de datos");
+    grafo.agregarRelacion("Cálculo Diferencial", "Cálculo Integral");
+    grafo.agregarRelacion("Cálculo de Probabilidades", "Distribución de Probabilidades");
+
+    grafo.mostrarRelaciones();
+
+    return 0;
+}
