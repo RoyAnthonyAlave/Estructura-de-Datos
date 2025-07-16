@@ -1,0 +1,177 @@
+//5.1.1
+#include <iostream>
+#include <vector>
+using namespace std;
+
+int main() {
+    vector<int> v;
+
+    for (int i = 1; i <= 5; i++) {
+        v.push_back(i * 10);
+    }
+
+    cout << "Elementos del vector:\n";
+    for (int x : v) cout << x << " ";
+    cout << endl;
+
+    v.pop_back();
+
+    cout << "Después de pop_back:\n";
+    for (int x : v) cout << x << " ";
+    cout << endl;
+
+    return 0;
+}
+
+
+
+//5.1.2
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+int main() {
+    vector<int> v = {5, 2, 8, 3, 1};
+
+    sort(v.begin(), v.end());
+
+    cout << "Vector ordenado:\n";
+    for (auto it = v.begin(); it != v.end(); ++it) {
+        cout << *it << " ";
+    }
+    cout << endl;
+
+    int x = 3;
+    auto pos = lower_bound(v.begin(), v.end(), x);
+
+    if (pos != v.end())
+        cout << "Primera posición >= " << x << " es " << (pos - v.begin()) << endl;
+    else
+        cout << x << " no encontrado o es mayor que todos." << endl;
+
+    return 0;
+}
+
+
+
+//5.2.1
+#include <iostream>
+#include <set>
+using namespace std;
+
+int main() {
+    set<int> s;
+    s.insert(3);
+    s.insert(1);
+    s.insert(4);
+    s.insert(1);
+
+    for (int x : s) cout << x << " ";
+    cout << endl;
+
+    if (s.find(3) != s.end()) cout << "3 está en el set\n";
+}
+
+
+
+//5.2.2
+#include <iostream>
+#include <map>
+using namespace std;
+
+int main() {
+    map<string, int> m;
+
+    m["uva"] = 5;
+    m["manzana"] = 3;
+    m["naranja"] = 7;
+
+    cout << "Cantidad de manzanas: " << m["manzana"] << endl;
+
+    for (const pair<string, int>& par : m) {
+        cout << par.first << ": " << par.second << endl;
+    }
+
+    return 0;
+}
+
+
+
+//5.2.3
+#include <iostream>
+#include <queue>
+using namespace std;
+
+int main() {
+    priority_queue<int> pq;
+
+    pq.push(5);
+    pq.push(1);
+    pq.push(10);
+
+    cout << "Máximo: " << pq.top() << endl;
+
+    pq.pop();
+
+    cout << "Siguiente máximo: " << pq.top() << endl;
+
+    return 0;
+}
+
+
+
+//5.2.4
+#include <bits/stdc++.h>
+#include <ext/pb_ds/assoc_container.hpp>
+using namespace std;
+using namespace __gnu_pbds;
+
+template<typename T>
+using ordered_set = tree<
+    T, null_type, less<T>,
+    rb_tree_tag,
+    tree_order_statistics_node_update>;
+
+int main() {
+    ordered_set<int> s;
+    s.insert(10);
+    s.insert(20);
+    s.insert(30);
+
+    cout << "Elemento en posición 1: " << *s.find_by_order(1) << "\n";
+    cout << "Cantidad < 25: " << s.order_of_key(25) << "\n";
+
+    return 0;
+}
+
+
+
+//5.3
+#include <iostream>
+#include <set>
+using namespace std;
+
+struct Tarea {
+    int duracion, deadline;
+
+    bool operator<(const Tarea& otra) const {
+        if (deadline == otra.deadline)
+            return duracion < otra.duracion;
+        return deadline < otra.deadline;
+    }
+};
+
+int main() {
+    set<Tarea> tareas;
+
+    tareas.insert({3, 10});
+    tareas.insert({2, 10});
+    tareas.insert({5, 7});
+
+    for (auto t : tareas) {
+        cout << "Duración: " << t.duracion << ", Deadline: " << t.deadline << endl;
+    }
+
+    return 0;
+}
