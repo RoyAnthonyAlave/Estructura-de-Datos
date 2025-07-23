@@ -1,0 +1,2403 @@
+\documentclass[12pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[spanish]{babel}
+\usepackage{amsmath}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{hyperref}
+\usepackage{pagecolor} % Aquí añades el paquete para el color de página
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    urlcolor=blue,
+}
+
+% Configuración para código C++
+\lstset{
+    language=C++,
+    backgroundcolor=\color{gray!10},
+    basicstyle=\ttfamily\small,
+    keywordstyle=\color{blue}\bfseries,
+    commentstyle=\color{green!50!black}\itshape,
+    stringstyle=\color{red},
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=8pt,
+    frame=single,
+    breaklines=true,
+    tabsize=4,
+    showstringspaces=false,
+    captionpos=b,
+}
+
+\title{Ejemplos de Programas en C++ con Explicación}
+\author{Roy Anthony Quispe Alave \\ \textbf{Ing.:} Fred Torres Cruz}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+\pagecolor{green!30} % Fondo verde para la primera página
+
+% Contenido de la presentación (primera página)
+
+\newpage % Saltar a la siguiente página
+
+\pagecolor{white} % Volver fondo blanco para el resto del documento
+
+\maketitle
+\newpage
+\tableofcontents
+\newpage
+\section{Ejemplo 1: Cálculo del promedio de tres números enteros}
+
+En este ejemplo vamos a desarrollar un programa en lenguaje C++ que permita al usuario ingresar tres números enteros. El programa calculará y mostrará el promedio de estos números. Este ejercicio es útil para comprender conceptos fundamentales como:
+
+\begin{itemize}
+    \item Declaración de variables.
+    \item Entrada y salida de datos.
+    \item Operaciones aritméticas básicas.
+    \item Estructura general de un programa en C++.
+\end{itemize}
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Programa en C++ para calcular el promedio de tres números}]
+#include <iostream>
+using namespace std;
+
+int main() {
+    int a, b, c, promedio;
+
+    cout << "Ingrese el primer número: ";
+    cin >> a;
+
+    cout << "Ingrese el segundo número: ";
+    cin >> b;
+
+    cout << "Ingrese el tercer número: ";
+    cin >> c;
+
+    promedio = (a + b + c) / 3;
+
+    cout << "El promedio es: " << promedio << endl;
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación del código}
+
+\begin{enumerate}
+    \item \textbf{\texttt{\#include <iostream>}}: Esta línea permite utilizar las funciones de entrada y salida de la biblioteca estándar de C++, como \texttt{cin} (leer desde el teclado) y \texttt{cout} (mostrar en pantalla).
+    
+    \item \textbf{\texttt{using namespace std;}}: C++ organiza su biblioteca estándar en un espacio de nombres llamado \texttt{std}. Esta línea evita tener que escribir \texttt{std::} delante de funciones como \texttt{cout} o \texttt{cin}, facilitando la lectura y escritura del código.
+
+    \item \textbf{\texttt{int main()}}: Es la función principal del programa. Todo programa en C++ comienza su ejecución desde esta función.
+
+    \item \textbf{\texttt{int a, b, c, promedio;}}: Se declaran cuatro variables enteras:
+        \begin{itemize}
+            \item \texttt{a}, \texttt{b}, \texttt{c}: almacenan los tres números que el usuario va a ingresar.
+            \item \texttt{promedio}: almacena el resultado del promedio calculado.
+        \end{itemize}
+
+    \item \textbf{Entrada de datos:}
+        \begin{itemize}
+            \item Con \texttt{cout} se le pide al usuario que introduzca un número.
+            \item Con \texttt{cin}, se guarda ese número en una de las variables.
+            \item Este proceso se repite para los tres números.
+        \end{itemize}
+
+    \item \textbf{Cálculo del promedio:}
+    \begin{itemize}
+        \item Se suman los tres valores con la expresión \texttt{a + b + c}.
+        \item El resultado se divide entre 3 con la expresión \texttt{(a + b + c) / 3}.
+        \item Dado que todas las variables son de tipo \texttt{int}, la división también será entera. Esto significa que si el resultado tiene decimales, estos se descartan (no se redondean).
+    \end{itemize}
+
+    \item \textbf{Salida del resultado:}  
+    Con la instrucción \texttt{cout << "El promedio es: " << promedio}, el programa muestra el resultado final por pantalla.
+
+    \item \textbf{\texttt{return 0;}}: Esta línea indica que el programa ha finalizado correctamente.
+\end{enumerate}
+
+\subsection*{Consideraciones adicionales}
+
+\begin{itemize}
+    \item Este programa utiliza variables de tipo \texttt{int}, lo que significa que solo maneja números enteros. Si el usuario ingresa números decimales, estos no serán aceptados.
+    
+    \item El promedio también será un número entero. Por ejemplo, si el usuario ingresa 5, 7 y 8, la suma es 20. El promedio real es 6.66, pero el programa mostrará \texttt{6} porque al usar enteros, los decimales se descartan.
+
+    \item Para solucionar esto y obtener resultados más precisos, es recomendable utilizar variables de tipo \texttt{float} o \texttt{double}, que permiten trabajar con números decimales. Más adelante presentaremos una versión modificada del programa que hace justamente eso.
+\end{itemize}
+
+\subsection*{Ejemplo de ejecución}
+
+\begin{verbatim}
+Ingrese el primer número: 10
+Ingrese el segundo número: 20
+Ingrese el tercer número: 30
+El promedio es: 20
+\end{verbatim}
+
+Este resultado es correcto porque \( \frac{10 + 20 + 30}{3} = 20 \). Pero si los números no son múltiplos de 3, el promedio entero podría perder precisión.
+
+\newpage
+\section{Ejemplo 2: Evaluación de aprobación o desaprobación según nota}
+
+Este ejemplo muestra cómo tomar una decisión en un programa según el valor ingresado por el usuario. El programa solicita una nota y determina si la persona aprueba o desaprueba utilizando una estructura condicional. Este ejercicio es útil para aprender sobre:
+
+\begin{itemize}
+    \item Ingreso de datos por teclado.
+    \item Uso de estructuras de control condicional (\texttt{if - else}).
+    \item Lógica básica de decisiones en programación.
+\end{itemize}
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Programa que evalúa si una nota es aprobatoria}]
+#include <iostream>
+using namespace std;
+
+int main() {
+    int nota;
+
+    cout << "Ingrese la nota: ";
+    cin >> nota;
+
+    if (nota > 10) {
+        cout << "Aprobado";
+    } else {
+        cout << "Desaprobado";
+    }
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada del código}
+
+\begin{enumerate}
+    \item \textbf{\texttt{\#include <iostream>}}: Permite usar las funciones de entrada y salida estándar como \texttt{cin} (leer desde el teclado) y \texttt{cout} (mostrar en pantalla).
+    
+    \item \textbf{\texttt{using namespace std;}}: Nos permite usar los objetos del espacio de nombres estándar (como \texttt{cout} y \texttt{cin}) sin tener que escribir \texttt{std::} cada vez.
+
+    \item \textbf{\texttt{int main()}}: Es la función principal del programa, donde comienza la ejecución.
+
+    \item \textbf{\texttt{int nota;}}: Se declara una variable entera llamada \texttt{nota} que almacenará el valor ingresado por el usuario.
+
+    \item \textbf{Ingreso de datos:}
+    \begin{itemize}
+        \item \texttt{cout << "Ingrese la nota: "} muestra un mensaje solicitando al usuario que ingrese una nota.
+        \item \texttt{cin >> nota;} lee el número ingresado y lo guarda en la variable \texttt{nota}.
+    \end{itemize}
+
+    \item \textbf{Condición:}
+    \begin{itemize}
+        \item Se utiliza una estructura \texttt{if - else} para evaluar si la nota es mayor que 10.
+        \item Si la condición \texttt{nota > 10} es verdadera, se considera que el estudiante ha aprobado y se muestra el mensaje \texttt{"Aprobado"}.
+        \item Si la condición es falsa (es decir, si la nota es 10 o menor), se muestra el mensaje \texttt{"Desaprobado"}.
+    \end{itemize}
+
+    \item \textbf{\texttt{return 0;}}: Finaliza el programa indicando que terminó correctamente.
+\end{enumerate}
+
+\subsection*{Comentarios pedagógicos}
+
+\begin{itemize}
+    \item Este programa aplica una regla simple para decidir si una nota es aprobatoria: si es mayor a 10, se aprueba.
+    
+    \item No hay validación del dato ingresado. Si el usuario ingresa una nota negativa o mayor a 20 (dependiendo del sistema de calificación), el programa igualmente lo aceptará. Se puede mejorar el código agregando una validación que solo acepte valores entre 0 y 20, por ejemplo.
+
+    \item Este programa es útil para ilustrar cómo tomar decisiones en base a condiciones lógicas, algo fundamental en cualquier lenguaje de programación.
+\end{itemize}
+
+\subsection*{Ejemplo de ejecución}
+
+\begin{verbatim}
+Ingrese la nota: 15
+Aprobado
+\end{verbatim}
+
+\begin{verbatim}
+Ingrese la nota: 9
+Desaprobado
+\end{verbatim}
+
+\newpage
+\section{Ejemplo 3: Cálculo del área de un círculo}
+
+Este programa en C++ permite calcular el área de un círculo a partir del valor del radio ingresado por el usuario. Se utiliza la fórmula matemática:
+
+\[
+\text{Área} = \pi \times r^2
+\]
+
+donde:
+\begin{itemize}
+    \item \(\pi\) (pi) es una constante matemática, aproximadamente igual a 3.14.
+    \item \(r\) es el radio del círculo.
+\end{itemize}
+
+Este ejemplo permite practicar el uso de:
+\begin{itemize}
+    \item Variables de tipo decimal (\texttt{float}).
+    \item Entrada de datos numéricos.
+    \item Uso de expresiones matemáticas.
+    \item Salida de resultados con \texttt{cout}.
+\end{itemize}
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Programa en C++ para calcular el área de un círculo}]
+#include <iostream>
+using namespace std;
+
+int main() {
+    float radio, area;
+    float pi = 3.14;
+
+    cout << "Ingrese el radio del círculo: ";
+    cin >> radio;
+
+    area = pi * (radio * radio);
+
+    cout << "El área del círculo es: " << area << endl;
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada del código}
+
+\begin{enumerate}
+    \item \textbf{\texttt{\#include <iostream>}}: Permite el uso de funciones de entrada y salida como \texttt{cin} y \texttt{cout}.
+    
+    \item \textbf{\texttt{using namespace std;}}: Nos permite omitir el prefijo \texttt{std::} al usar elementos de la biblioteca estándar.
+
+    \item \textbf{Declaración de variables:}
+    \begin{itemize}
+        \item \texttt{float radio, area;} define dos variables decimales que almacenan el radio ingresado por el usuario y el área calculada.
+        \item \texttt{float pi = 3.14;} declara una variable para representar la constante \(\pi\).
+    \end{itemize}
+
+    \item \textbf{Ingreso de datos:}
+    \begin{itemize}
+        \item El programa solicita al usuario que ingrese el valor del radio con \texttt{cout}.
+        \item Luego, se captura el valor con \texttt{cin >> radio;}.
+    \end{itemize}
+
+    \item \textbf{Cálculo del área:}
+    \begin{itemize}
+        \item La fórmula usada es: \texttt{area = pi * (radio * radio);} que representa \(\pi \cdot r^2\).
+        \item El operador de multiplicación se usa dos veces: una para elevar al cuadrado el radio (\texttt{radio * radio}) y otra para multiplicar por pi.
+    \end{itemize}
+
+    \item \textbf{Salida de resultados:}
+    \begin{itemize}
+        \item Se muestra el área calculada con \texttt{cout}.
+        \item El valor se imprime como número decimal, debido al tipo \texttt{float}.
+    \end{itemize}
+
+    \item \textbf{\texttt{return 0;}}: Indica que el programa terminó sin errores.
+\end{enumerate}
+
+\subsection*{Observaciones importantes}
+
+\begin{itemize}
+    \item El valor de pi se ha definido manualmente como 3.14, lo cual es una aproximación. Para mayor precisión, se puede usar la constante \texttt{M\_PI} de la biblioteca \texttt{<cmath>} o definir \texttt{pi = 3.14159265}.
+    
+    \item Este programa no valida si el valor del radio es negativo. Si se desea mejorar la robustez, se podría incluir una verificación para evitar radios menores o iguales a cero.
+
+    \item El uso del tipo \texttt{float} permite trabajar con valores decimales, lo cual es importante cuando se trata de medidas físicas como longitudes y áreas.
+\end{itemize}
+
+\subsection*{Ejemplo de ejecución}
+
+\begin{verbatim}
+Ingrese el radio del círculo: 5
+El área del círculo es: 78.5
+\end{verbatim}
+
+
+\newpage
+\section{Ejemplo 4: Suma de vectores y cálculo del producto escalar}
+
+Este programa en C++ permite trabajar con vectores (arreglos) de 5 elementos. El usuario debe ingresar los valores de dos vectores: \texttt{a} y \texttt{b}. Luego, el programa:
+
+\begin{itemize}
+    \item Calcula la suma elemento a elemento (\(a_i + b_i\)) y la muestra por pantalla.
+    \item Calcula el producto escalar de los vectores, que es una operación matemática muy utilizada en física y álgebra lineal.
+\end{itemize}
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Suma de vectores y cálculo del producto escalar}]
+#include <iostream>
+
+using namespace std;
+
+int main() {
+    const int n = 5;
+    int a[n], b[n];
+    int suma[n];
+    
+    for (int i = 0; i < n; i++) {
+        cin >> a[i];
+        cin >> b[i];
+    }
+
+    int ProductoEsc = 0;
+
+    for (int i = 0; i < n; i++) {
+        suma[i] = a[i] + b[i];
+        ProductoEsc += a[i] * b[i];
+        cout << suma[i] << endl;
+    }
+
+    cout << ProductoEsc << endl;
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada del código}
+
+\begin{enumerate}
+    \item \textbf{Librerías:} \texttt{\#include <iostream>} permite usar funciones de entrada/salida como \texttt{cin} y \texttt{cout}.
+
+    \item \textbf{Espacio de nombres:} \texttt{using namespace std;} simplifica el uso de funciones estándar sin escribir \texttt{std::} cada vez.
+
+    \item \textbf{Constante \texttt{n}:} Se define una constante \texttt{n = 5}, que indica el tamaño de los vectores. Esto permite cambiar fácilmente el tamaño sin modificar el resto del código.
+
+    \item \textbf{Declaración de vectores:}
+    \begin{itemize}
+        \item \texttt{a[n]} y \texttt{b[n]} son los dos vectores de entrada.
+        \item \texttt{suma[n]} es un vector auxiliar que guarda la suma de cada par de elementos.
+    \end{itemize}
+
+    \item \textbf{Lectura de datos:}
+    \begin{itemize}
+        \item Se usa un bucle \texttt{for} para ingresar los valores de los vectores \texttt{a} y \texttt{b}. Por cada iteración, el usuario debe ingresar dos números.
+        \item Se repite 5 veces, una por cada posición del vector.
+    \end{itemize}
+
+    \item \textbf{Producto escalar y suma:}
+    \begin{itemize}
+        \item Se inicializa la variable \texttt{ProductoEsc} en 0.
+        \item En el segundo bucle \texttt{for} se calcula:
+        \begin{itemize}
+            \item La suma elemento a elemento: \texttt{suma[i] = a[i] + b[i];}
+            \item El producto escalar: \texttt{ProductoEsc += a[i] * b[i];}
+        \end{itemize}
+        \item Además, se muestra por pantalla el valor de \texttt{suma[i]} en cada iteración.
+    \end{itemize}
+
+    \item \textbf{Resultado final:}
+    \begin{itemize}
+        \item Se muestra el resultado del producto escalar al finalizar el segundo bucle.
+    \end{itemize}
+
+    \item \textbf{\texttt{return 0;}} indica que el programa terminó correctamente.
+\end{enumerate}
+
+\subsection*{Concepto matemático: Producto escalar}
+
+El \textbf{producto escalar} de dos vectores \( \vec{a} \) y \( \vec{b} \) se define como:
+
+\[
+\vec{a} \cdot \vec{b} = a_1b_1 + a_2b_2 + \ldots + a_n b_n
+\]
+
+Es un número (escalar) que resulta de multiplicar componente a componente dos vectores y sumar los resultados. Tiene muchas aplicaciones, por ejemplo en:
+
+\begin{itemize}
+    \item Determinar el ángulo entre dos vectores.
+    \item Calcular trabajo mecánico (\( W = \vec{F} \cdot \vec{d} \)).
+    \item Verificar si dos vectores son ortogonales (si el producto escalar es 0).
+\end{itemize}
+
+\subsection*{Ejemplo de ejecución}
+
+\begin{verbatim}
+Entradas:
+1 2
+3 4
+5 6
+7 8
+9 10
+
+Salidas:
+3
+7
+11
+15
+19
+190
+\end{verbatim}
+
+\textbf{Explicación del resultado:}
+\begin{itemize}
+    \item Las salidas \texttt{3, 7, 11, 15, 19} corresponden a la suma de cada par: \texttt{a[i] + b[i]}.
+    \item El producto escalar es: \(1*2 + 3*4 + 5*6 + 7*8 + 9*10 = 190\).
+\end{itemize}
+
+\subsection*{Posibles mejoras}
+
+\begin{itemize}
+    \item Mostrar mensajes explicativos al pedir los datos.
+    \item Separar la suma de vectores y el producto escalar en funciones distintas.
+    \item Permitir que el tamaño del vector (\texttt{n}) sea definido por el usuario.
+\end{itemize}
+
+\newpage
+\section{Ejemplo 5: Promedio de notas y conteo de estudiantes por encima del promedio}
+
+Este programa permite ingresar las notas de 30 estudiantes, calcula el promedio de todas las notas y muestra cuántos estudiantes obtuvieron una calificación superior al promedio general. Este ejemplo es útil para aprender sobre:
+
+\begin{itemize}
+    \item Arreglos (vectores) para almacenar múltiples datos.
+    \item Bucles \texttt{for} para iterar sobre arreglos.
+    \item Acumuladores para calcular sumas.
+    \item Cálculo de promedio.
+    \item Condicionales para contar cuántos elementos cumplen una condición.
+\end{itemize}
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Promedio y conteo de notas mayores al promedio}]
+#include <iostream>
+using namespace std;
+
+int main() {
+    int tamanio = 30;
+    int suma = 0;
+    int arrai[tamanio];
+
+    for (int i = 0; i < tamanio; i++) {
+        cout << "Ingresa un numero: ";
+        cin >> arrai[i];
+        suma += arrai[i];
+    }
+
+    int promedio = suma / tamanio;
+
+    int encima = 0;
+    for (int i = 0; i < tamanio; i++) {
+        if (arrai[i] > promedio) {
+            encima++;
+        }
+    }
+
+    cout << "Promedio: " << promedio << endl;
+    cout << "Estudiantes por encima del promedio: " << encima << endl;
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada del código}
+
+\begin{enumerate}
+    \item \textbf{Declaración de variables:}
+    \begin{itemize}
+        \item \texttt{tamanio = 30}: define que el arreglo tendrá espacio para 30 notas.
+        \item \texttt{suma}: almacena la suma acumulada de todas las notas.
+        \item \texttt{arrai[tamanio]}: arreglo donde se almacenan las 30 notas ingresadas por el usuario.
+    \end{itemize}
+
+    \item \textbf{Lectura de datos y suma acumulada:}
+    \begin{itemize}
+        \item Se usa un bucle \texttt{for} para recorrer desde 0 hasta 29 (30 elementos).
+        \item En cada iteración, el programa solicita al usuario que ingrese una nota y la guarda en el arreglo.
+        \item La nota se suma a la variable \texttt{suma}.
+    \end{itemize}
+
+    \item \textbf{Cálculo del promedio:}
+    \[
+    \texttt{promedio = suma / tamanio;}
+    \]
+    \begin{itemize}
+        \item El promedio se obtiene dividiendo la suma total entre el número de estudiantes.
+        \item Como las variables son enteras, el promedio será un número entero (los decimales se truncarán).
+    \end{itemize}
+
+    \item \textbf{Conteo de estudiantes con notas superiores al promedio:}
+    \begin{itemize}
+        \item Se declara una nueva variable \texttt{encima} que inicia en 0.
+        \item Se recorre nuevamente el arreglo. Si una nota es mayor que el promedio, se incrementa \texttt{encima}.
+    \end{itemize}
+
+    \item \textbf{Salida de resultados:}
+    \begin{itemize}
+        \item Se muestra el promedio general.
+        \item Se imprime cuántos estudiantes obtuvieron notas por encima de dicho promedio.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Ejemplo de ejecución}
+
+\begin{verbatim}
+Ingresa un numero: 10
+Ingresa un numero: 15
+...
+Ingresa un numero: 20
+Promedio: 14
+Estudiantes por encima del promedio: 11
+\end{verbatim}
+
+\subsection*{Posibles mejoras del programa}
+
+\begin{itemize}
+    \item Mostrar los valores por encima del promedio, no solo contarlos.
+    \item Calcular el promedio como \texttt{float} para incluir decimales: 
+    \texttt{float promedio = float(suma) / tamanio;}
+    \item Permitir al usuario elegir la cantidad de estudiantes (hacer el tamaño del arreglo dinámico).
+    \item Validar que las notas ingresadas estén en un rango válido (por ejemplo, de 0 a 20).
+\end{itemize}
+
+
+\newpage
+\section{Ejemplo 6: Conteo de números primos generados aleatoriamente}
+
+Este programa en C++ genera 100 números aleatorios entre 1 y 500, los guarda en un arreglo, y luego cuenta cuántos de esos números son primos. Para ello, utiliza una función llamada \texttt{esPrimo()} que determina si un número es primo o no. Es un excelente ejemplo para comprender:
+
+\begin{itemize}
+    \item Uso de funciones personalizadas.
+    \item Lógica para verificar números primos.
+    \item Generación de números aleatorios con \texttt{rand()}.
+    \item Recorrido y análisis de arreglos.
+\end{itemize}
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Conteo de números primos en un arreglo aleatorio}]
+#include <iostream>
+#include <cstdlib>
+#include <ctime>
+using namespace std;
+
+bool esPrimo(int numero) {
+    if (numero <= 1) return false;
+    for (int i = 2; i * i <= numero; i++) {
+        if (numero % i == 0) return false;
+    }
+    return true;
+}
+
+int main() {
+    const int tamanio = 100;
+    int arrai[tamanio];
+    int cantidadPrimos = 0;
+
+    srand(time(0));
+
+    for (int i = 0; i < tamanio; i++) {
+        arrai[i] = rand() % 500 + 1;
+        if (esPrimo(arrai[i])) {
+            cantidadPrimos++;
+        }
+    }
+
+    cout << "Cantidad de numeros primos en el arreglo: " << cantidadPrimos << endl;
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada del código}
+
+\begin{enumerate}
+    \item \textbf{Inclusión de librerías:}
+    \begin{itemize}
+        \item \texttt{<iostream>}: permite el uso de \texttt{cin} y \texttt{cout}.
+        \item \texttt{<cstdlib>}: contiene la función \texttt{rand()} para generar números aleatorios.
+        \item \texttt{<ctime>}: permite inicializar la semilla aleatoria con \texttt{time(0)}.
+    \end{itemize}
+
+    \item \textbf{Función \texttt{esPrimo(int numero)}:}
+    \begin{itemize}
+        \item Verifica si un número es primo.
+        \item Devuelve \texttt{false} si el número es menor o igual a 1.
+        \item Recorre desde 2 hasta la raíz cuadrada del número.
+        \item Si el número es divisible por algún valor en ese rango, no es primo.
+        \item Si no se encontró ningún divisor, se retorna \texttt{true}.
+    \end{itemize}
+
+    \item \textbf{En el \texttt{main()}:}
+    \begin{itemize}
+        \item Se declara un arreglo de tamaño 100.
+        \item Se inicializa la variable \texttt{cantidadPrimos} en 0.
+        \item \texttt{srand(time(0));} establece una semilla aleatoria distinta en cada ejecución.
+    \end{itemize}
+
+    \item \textbf{Generación de datos y conteo de primos:}
+    \begin{itemize}
+        \item Con un bucle \texttt{for}, se generan 100 números aleatorios entre 1 y 500 con \texttt{rand() \% 500 + 1}.
+        \item Cada número se guarda en el arreglo \texttt{arrai[i]}.
+        \item Se llama a la función \texttt{esPrimo()} para verificar si ese número es primo.
+        \item Si es primo, se incrementa \texttt{cantidadPrimos}.
+    \end{itemize}
+
+    \item \textbf{Resultado final:}
+    \begin{itemize}
+        \item Se imprime la cantidad total de números primos encontrados en el arreglo.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Concepto matemático: Número primo}
+
+Un número primo es aquel que solo tiene dos divisores positivos: el 1 y él mismo. Por ejemplo: 2, 3, 5, 7, 11, etc.
+
+El algoritmo usado para verificar si un número es primo optimiza el proceso al comprobar divisores solo hasta la raíz cuadrada del número, lo cual reduce significativamente el tiempo de ejecución.
+
+\subsection*{Ejemplo de ejecución (resultado variable)}
+
+\begin{verbatim}
+Cantidad de numeros primos en el arreglo: 21
+\end{verbatim}
+
+El número final puede variar en cada ejecución porque los valores del arreglo se generan aleatoriamente.
+
+\subsection*{Posibles mejoras}
+
+\begin{itemize}
+    \item Mostrar cuáles son los números primos dentro del arreglo.
+    \item Usar un arreglo dinámico y permitir que el usuario defina el tamaño.
+    \item Contar cuántos números hay en distintos rangos (por ejemplo: cuántos entre 1–100, 101–200, etc.).
+\end{itemize}
+
+
+\newpage
+\section{Ejemplo 7: Rotación a la derecha de un arreglo}
+
+Este programa permite ingresar 10 números enteros, los guarda en un arreglo, y luego realiza una rotación a la derecha: el último elemento pasa a la primera posición y los demás se desplazan una posición hacia la derecha. Este tipo de manipulación de datos es útil en algoritmos de búsqueda, estructuras circulares o juegos.
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Rotación a la derecha de un arreglo de 10 elementos}]
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int tamanio = 10;
+    int arrai[tamanio];
+
+    for (int i = 0; i < tamanio; i++) {
+        cout << "Ingrese un numero: ";
+        cin >> arrai[i];
+    }
+
+    int ultimo = arrai[tamanio - 1];
+    for (int i = tamanio - 1; i > 0; i--) {
+        arrai[i] = arrai[i - 1];
+    }
+    arrai[0] = ultimo;
+
+    cout << "Arreglo rotado a la derecha:" << endl;
+    for (int i = 0; i < tamanio; i++) {
+        cout << arrai[i] << " ";
+    }
+    cout << endl;
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada del código}
+
+\begin{enumerate}
+    \item \textbf{Inicialización:}
+    \begin{itemize}
+        \item Se define una constante \texttt{tamanio = 10}.
+        \item Se declara un arreglo de tamaño 10 llamado \texttt{arrai}.
+    \end{itemize}
+
+    \item \textbf{Ingreso de datos:}
+    \begin{itemize}
+        \item Con un bucle \texttt{for}, se pide al usuario que ingrese 10 números que se almacenan en el arreglo.
+    \end{itemize}
+
+    \item \textbf{Rotación a la derecha:}
+    \begin{itemize}
+        \item Se guarda el último elemento del arreglo en una variable temporal: \texttt{ultimo = arrai[tamanio - 1];}.
+        \item Con un bucle que va desde el final del arreglo hacia el principio (\texttt{i > 0}), se desplaza cada elemento hacia la derecha:
+        \[
+        \texttt{arrai[i] = arrai[i - 1];}
+        \]
+        \item Finalmente, se coloca el valor guardado en la primera posición:
+        \[
+        \texttt{arrai[0] = ultimo;}
+        \]
+    \end{itemize}
+
+    \item \textbf{Impresión del arreglo rotado:}
+    \begin{itemize}
+        \item Se recorre nuevamente el arreglo con un \texttt{for} y se imprimen los elementos en su nueva posición.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Ejemplo de ejecución}
+
+\begin{verbatim}
+Ingrese un numero: 1
+Ingrese un numero: 2
+...
+Ingrese un numero: 10
+
+Arreglo rotado a la derecha:
+10 1 2 3 4 5 6 7 8 9
+\end{verbatim}
+
+\subsection*{Aplicaciones comunes}
+
+\begin{itemize}
+    \item Algoritmos de cifrado y decodificación.
+    \item Estructuras circulares como buffers de audio/video.
+    \item Juegos de programación donde se requiere manipulación de estados cíclicos.
+\end{itemize}
+
+\subsection*{Mejoras sugeridas}
+
+\begin{itemize}
+    \item Hacer que el tamaño del arreglo sea definido por el usuario.
+    \item Permitir rotar más de una vez.
+    \item Implementar también una rotación a la izquierda.
+\end{itemize}
+
+
+
+\newpage
+\section{Ejemplo 8: Conteo de frecuencias en un arreglo}
+
+Este programa permite al usuario ingresar 20 números, almacenarlos en un arreglo y luego calcular cuántas veces se repite cada número dentro del mismo arreglo. Es un ejemplo ideal para entender:
+
+\begin{itemize}
+    \item Recorridos anidados con \texttt{for}.
+    \item Uso de un arreglo auxiliar para marcar elementos ya contados.
+    \item Algoritmos básicos de frecuencia (cuántas veces se repite cada elemento).
+\end{itemize}
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Conteo de frecuencia de números en un arreglo}]
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int tamanio = 20;
+    int arrai[tamanio];
+    int frecuencia[tamanio];
+    bool contado[tamanio];
+
+    for (int i = 0; i < tamanio; i++) {
+        cout << "Ingrese un numero: ";
+        cin >> arrai[i];
+        contado[i] = false;
+    }
+
+    for (int i = 0; i < tamanio; i++) {
+        if (!contado[i]) {
+            int contador = 1;
+            for (int j = i + 1; j < tamanio; j++) {
+                if (arrai[i] == arrai[j]) {
+                    contador++;
+                    contado[j] = true;
+                }
+            }
+            cout << "El numero " << arrai[i] << " aparece " << contador << " veces" << endl;
+        }
+    }
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada del código}
+
+\begin{enumerate}
+    \item \textbf{Declaración de variables:}
+    \begin{itemize}
+        \item \texttt{arrai[tamanio]}: almacena los 20 números ingresados.
+        \item \texttt{frecuencia[tamanio]}: no se usa en este código; puede eliminarse o usarse en una versión mejorada.
+        \item \texttt{contado[tamanio]}: marca con \texttt{true} los elementos que ya fueron contados para no repetir el conteo.
+    \end{itemize}
+
+    \item \textbf{Ingreso de datos:}
+    \begin{itemize}
+        \item Se solicita al usuario ingresar 20 números enteros.
+        \item Cada número se guarda en \texttt{arrai[i]}.
+        \item Se inicializa cada \texttt{contado[i]} como \texttt{false}.
+    \end{itemize}
+
+    \item \textbf{Conteo de frecuencia:}
+    \begin{itemize}
+        \item Se recorre el arreglo desde el inicio.
+        \item Para cada número, si aún no ha sido contado (\texttt{!contado[i]}), se inicia un contador.
+        \item Se compara con los elementos siguientes del arreglo.
+        \item Si hay coincidencia, se incrementa el contador y se marca el índice correspondiente como \texttt{true}.
+        \item Finalmente, se muestra por pantalla cuántas veces se repite ese número.
+    \end{itemize}
+
+    \item \textbf{Evita contar duplicados múltiples:}
+    \begin{itemize}
+        \item Gracias al arreglo \texttt{contado}, los elementos repetidos no se vuelven a contar ni imprimir.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Ejemplo de ejecución}
+
+\begin{verbatim}
+Ingrese un numero: 4
+Ingrese un numero: 2
+Ingrese un numero: 4
+Ingrese un numero: 5
+...
+El numero 4 aparece 2 veces
+El numero 2 aparece 1 veces
+El numero 5 aparece 1 veces
+...
+\end{verbatim}
+
+\subsection*{Aplicaciones comunes}
+
+\begin{itemize}
+    \item Estadísticas: saber qué valor aparece más veces.
+    \item Procesamiento de texto o análisis de datos.
+    \item Optimización de algoritmos de búsqueda.
+\end{itemize}
+
+\subsection*{Mejoras sugeridas}
+
+\begin{itemize}
+    \item Usar un \texttt{map} o \texttt{unordered\_map} en lugar de dos arreglos para una solución más eficiente.
+    \item Guardar los valores únicos y sus frecuencias en dos arreglos separados.
+    \item Ordenar el arreglo antes del conteo para optimizar el proceso.
+    \item Mostrar los resultados ordenados por frecuencia o por valor.
+\end{itemize}
+
+
+\newpage
+\section{Ejemplo 9: Comparación de dos arreglos en la misma posición}
+
+Este programa permite al usuario ingresar dos arreglos de 10 elementos cada uno, y luego compara los valores en la misma posición de ambos arreglos. Al final, muestra cuántos elementos son exactamente iguales en la misma posición.
+
+Este tipo de programa es útil para aprender a:
+
+\begin{itemize}
+    \item Trabajar con múltiples arreglos.
+    \item Usar ciclos anidados de entrada y comparación.
+    \item Comparar valores posición por posición.
+    \item Contar coincidencias.
+\end{itemize}
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Comparación de arreglos en posiciones iguales}]
+#include <iostream>
+using namespace std;
+
+int main() {
+    const int tamanio = 10;
+    int arrai1[tamanio];
+    int arrai2[tamanio];
+    int iguales = 0;
+
+    for (int i = 0; i < tamanio; i++) {
+        cout << "Ingrese el elemento " << i + 1 << " del primer arreglo: ";
+        cin >> arrai1[i];
+    }
+
+    for (int i = 0; i < tamanio; i++) {
+        cout << "Ingrese el elemento " << i + 1 << " del segundo arreglo: ";
+        cin >> arrai2[i];
+    }
+
+    for (int i = 0; i < tamanio; i++) {
+        if (arrai1[i] == arrai2[i]) {
+            iguales++;
+        }
+    }
+
+    cout << "Cantidad de elementos iguales en la misma posicion: " << iguales << endl;
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación del código}
+
+\begin{enumerate}
+    \item \textbf{Declaración de arreglos:}
+    \begin{itemize}
+        \item Se crean dos arreglos \texttt{arrai1} y \texttt{arrai2} de tamaño 10 para almacenar los datos ingresados por el usuario.
+        \item Se declara una variable \texttt{iguales} para contar cuántas posiciones contienen valores iguales en ambos arreglos.
+    \end{itemize}
+
+    \item \textbf{Ingreso de datos:}
+    \begin{itemize}
+        \item Se solicita al usuario que llene el primer arreglo.
+        \item Luego, se repite el proceso para el segundo arreglo.
+    \end{itemize}
+
+    \item \textbf{Comparación:}
+    \begin{itemize}
+        \item Se recorre ambos arreglos simultáneamente.
+        \item En cada posición \texttt{i}, se compara si \texttt{arrai1[i] == arrai2[i]}.
+        \item Si los valores son iguales, se incrementa el contador \texttt{iguales}.
+    \end{itemize}
+
+    \item \textbf{Resultado:}
+    \begin{itemize}
+        \item Al final, se imprime cuántos elementos coincidieron en la misma posición.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Ejemplo de ejecución}
+
+\begin{verbatim}
+Ingrese el elemento 1 del primer arreglo: 5
+Ingrese el elemento 1 del segundo arreglo: 5
+...
+Ingrese el elemento 10 del primer arreglo: 9
+Ingrese el elemento 10 del segundo arreglo: 1
+
+Cantidad de elementos iguales en la misma posicion: 3
+\end{verbatim}
+
+\subsection*{Aplicaciones comunes}
+
+\begin{itemize}
+    \item Comparación de respuestas en pruebas tipo test.
+    \item Juegos de memoria donde se compara un patrón original con la respuesta del jugador.
+    \item Validación de datos en formularios múltiples.
+\end{itemize}
+
+\subsection*{Posibles mejoras}
+
+\begin{itemize}
+    \item Imprimir también las posiciones donde hubo coincidencias.
+    \item Permitir comparar arreglos de tamaño dinámico (definido por el usuario).
+    \item Mostrar la lista de valores coincidentes.
+    \item Contar cuántos valores coinciden aunque estén en diferente posición (coincidencias sin importar orden).
+\end{itemize}
+
+\newpage
+\section{Ejemplo 10: Uso de estructuras para manejar múltiples tipos de datos}
+
+Este programa muestra cómo definir y usar múltiples estructuras en C++ para almacenar diferentes tipos de información relacionada con componentes y variables estadísticas. Además, permite al usuario seleccionar qué tipo de datos quiere ingresar y captura esa información para tres elementos de ese tipo.
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Ingreso de datos con múltiples estructuras}]
+#include <iostream>
+#include <cstdlib>
+using namespace std;
+
+struct VariableEstadistica {
+    char nombre[30];
+    char tipo[20];
+    char unidad[20];
+} variables[3];
+
+struct IDE {
+    char nombre[30];
+    char lenguajeSoportado[30];
+    char licencia[20];
+} ides[3];
+
+// (Se definen más estructuras similares para MonitorExterno, DiscoDuro, etc.)
+
+int main() {
+    int opcion;
+
+    cout << "Seleccione una opcion para ingresar datos:\n";
+    cout << "(1) Variable Estadistica\n";
+    cout << "(2) IDE\n";
+    cout << "(3) Monitor Externo\n";
+    cout << "(4) Disco Duro\n";
+    cout << "(5) Procesador\n";
+    cout << "(6) USB\n";
+    cout << "(7) Cable UTP\n";
+    cout << "(8) Laptop\n";
+    cin >> opcion;
+
+    switch(opcion) {
+        case 1:
+            for(int i = 0; i < 3; i++) {
+                cout << "Nombre de variable estadistica " << i+1 << ": ";
+                cin >> variables[i].nombre;
+                cout << "Tipo (cualitativa/cuantitativa): ";
+                cin >> variables[i].tipo;
+                cout << "Unidad: ";
+                cin >> variables[i].unidad;
+            }
+            break;
+        // Casos 2 a 8 similares para otras estructuras
+        default:
+            cout << "Opción no válida" << endl;
+            break;
+    }
+
+    system("pause");
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada}
+
+\begin{itemize}
+    \item \textbf{Estructuras:} Se definen varias estructuras para modelar diferentes entidades, por ejemplo:
+    \begin{itemize}
+        \item \texttt{VariableEstadistica}: con atributos \texttt{nombre}, \texttt{tipo} y \texttt{unidad}.
+        \item \texttt{IDE}: para entornos de desarrollo, con nombre, lenguaje soportado y tipo de licencia.
+        \item Otras estructuras similares para componentes como monitores, discos duros, procesadores, etc.
+    \end{itemize}
+
+    \item \textbf{Arreglos de estructuras:} Para cada tipo se declara un arreglo con capacidad para 3 elementos, permitiendo almacenar varios registros.
+
+    \item \textbf{Ingreso de datos:} 
+    \begin{itemize}
+        \item Se pide al usuario elegir qué tipo de datos desea ingresar mediante un menú numérico.
+        \item Según la opción seleccionada, el programa ejecuta un \texttt{switch} que recorre el arreglo correspondiente y solicita los datos para cada uno de los 3 elementos.
+        \item Se usan cadenas de caracteres (\texttt{char[]}) para almacenar textos, ingresados con \texttt{cin}.
+    \end{itemize}
+
+    \item \textbf{Manejo básico de datos:} El programa simplemente captura los datos pero no los muestra ni los procesa posteriormente. Se puede ampliar para guardar, mostrar o manipular estos datos.
+
+    \item \textbf{Función \texttt{system("pause")}:} Se usa para pausar la consola al finalizar la ejecución (esto funciona en sistemas Windows).
+
+\end{itemize}
+
+\subsection*{Conceptos clave}
+
+\begin{itemize}
+    \item \textbf{Estructuras en C++:} Permiten agrupar variables relacionadas bajo un mismo tipo.
+    \item \textbf{Arreglos de estructuras:} Facilitan almacenar colecciones de registros similares.
+    \item \textbf{Entrada de datos:} Captura básica usando \texttt{cin} para llenar los campos de cada estructura.
+    \item \textbf{Uso del \texttt{switch}:} Controla el flujo del programa basado en la opción del usuario.
+\end{itemize}
+
+\subsection*{Posibles mejoras}
+
+\begin{itemize}
+    \item Mostrar los datos ingresados para confirmación.
+    \item Validar entradas del usuario (por ejemplo, que la opción sea válida).
+    \item Usar \texttt{std::string} en lugar de arreglos de \texttt{char} para manejar cadenas de texto más cómodamente.
+    \item Implementar funciones para manejar cada tipo de estructura, evitando repetir código en el \texttt{switch}.
+    \item Guardar los datos en archivos para persistencia.
+\end{itemize}
+
+
+
+
+
+
+\newpage
+\section{Ejemplo 11: Introducción a punteros en C++}
+
+Este programa demuestra el uso básico de punteros en C++. Muestra cómo se puede obtener la dirección de una variable, almacenarla en un puntero y acceder al valor a través de dicho puntero. Este concepto es esencial para trabajar con estructuras dinámicas, manejo de memoria, arreglos y funciones que modifican datos por referencia.
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Uso básico de punteros}]
+#include <iostream>
+int main() {
+    int var = 10;
+    int* ptr = &var;
+    std::cout << "El valor de var: " << var << std::endl;
+    std::cout << "La dirección de memoria de var: " << &var << std::endl;
+    std::cout << "El valor de ptr: " << ptr << std::endl;
+    std::cout << "El valor apuntado por ptr: " << *ptr << std::endl;
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación del código}
+
+\begin{enumerate}
+    \item \textbf{Declaración de variables:}
+    \begin{itemize}
+        \item \texttt{int var = 10;} declara una variable entera con valor 10.
+        \item \texttt{int* ptr = \&var;} declara un puntero \texttt{ptr} que almacena la dirección de memoria de la variable \texttt{var}.
+    \end{itemize}
+
+    \item \textbf{Impresión de valores:}
+    \begin{itemize}
+        \item \texttt{var} imprime directamente el valor 10.
+        \item \texttt{\&var} imprime la dirección de memoria donde se encuentra almacenado \texttt{var}.
+        \item \texttt{ptr} imprime la misma dirección de memoria, ya que apunta a \texttt{var}.
+        \item \texttt{*ptr} imprime el valor almacenado en la dirección que guarda \texttt{ptr}, es decir, también imprime 10.
+    \end{itemize}
+
+    \item \textbf{Concepto clave:}
+    \begin{itemize}
+        \item El operador \texttt{\&} (ampersand) se usa para obtener la dirección de una variable.
+        \item El operador \texttt{*} (asterisco) se usa para acceder al valor apuntado por un puntero (desreferenciación).
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Ejemplo de ejecución}
+
+\begin{verbatim}
+El valor de var: 10
+La dirección de memoria de var: 0x61ff08
+El valor de ptr: 0x61ff08
+El valor apuntado por ptr: 10
+\end{verbatim}
+
+\textbf{Nota:} La dirección de memoria mostrada puede variar en cada ejecución.
+
+\subsection*{Aplicaciones de los punteros}
+
+\begin{itemize}
+    \item Manejo dinámico de memoria con \texttt{new} y \texttt{delete}.
+    \item Arreglos dinámicos y estructuras enlazadas (listas, pilas, colas).
+    \item Paso de variables por referencia a funciones.
+    \item Optimización del rendimiento al evitar copias innecesarias de datos.
+\end{itemize}
+
+\subsection*{Posibles mejoras o extensiones}
+
+\begin{itemize}
+    \item Modificar el valor de \texttt{var} a través de \texttt{*ptr}.
+    \item Agregar otro puntero que apunte al mismo valor.
+    \item Usar punteros con arreglos.
+    \item Mostrar cómo cambiar la dirección apuntada por \texttt{ptr}.
+\end{itemize}
+
+
+
+\newpage
+\section{Ejemplo 12: Uso de estructuras, punteros y memoria dinámica en C++}
+
+En este programa definimos una estructura \texttt{Persona} que contiene datos sobre una persona y un método para saludar. Luego, creamos dinámicamente un objeto \texttt{Persona} en memoria usando un puntero, accedemos a sus miembros y liberamos la memoria.
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Estructura Persona con puntero y memoria dinámica}]
+#include <iostream>
+struct Persona {
+    std::string nombre;
+    int edad;
+    void saludar() {
+        std::cout << "Hola, mi nombre es "
+                  << nombre << " y tengo "
+                  << edad << " años."
+                  << std::endl;
+    }
+};
+
+int main() {
+    Persona* ptrPersona = new Persona();
+    ptrPersona->nombre = "Juan";
+    ptrPersona->edad = 30;
+
+    std::cout << "Nombre: " << ptrPersona->nombre << std::endl;
+    std::cout << "Edad: " << ptrPersona->edad << std::endl;
+
+    ptrPersona->saludar();
+
+    delete ptrPersona;
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada}
+
+\begin{enumerate}
+    \item \textbf{Definición de la estructura \texttt{Persona}:}
+    \begin{itemize}
+        \item Contiene dos campos: \texttt{nombre} (cadena de texto) y \texttt{edad} (entero).
+        \item Tiene un método \texttt{saludar()} que imprime un mensaje personalizado con los datos de la persona.
+    \end{itemize}
+
+    \item \textbf{Uso de punteros y memoria dinámica:}
+    \begin{itemize}
+        \item \texttt{Persona* ptrPersona = new Persona();} crea un objeto \texttt{Persona} en memoria dinámica y asigna su dirección al puntero \texttt{ptrPersona}.
+        \item Usamos el operador \texttt{->} para acceder a los miembros \texttt{nombre}, \texttt{edad} y al método \texttt{saludar()} a través del puntero.
+        \item Esto es equivalente a \texttt{(*ptrPersona).nombre}, pero con una sintaxis más sencilla.
+    \end{itemize}
+
+    \item \textbf{Asignación de valores:}
+    \begin{itemize}
+        \item Se asigna el nombre ``Juan'' y la edad 30 al objeto apuntado por \texttt{ptrPersona}.
+    \end{itemize}
+
+    \item \textbf{Liberación de memoria:}
+    \begin{itemize}
+        \item \texttt{delete ptrPersona;} libera la memoria asignada dinámicamente para evitar fugas de memoria.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Ejemplo de salida}
+
+\begin{verbatim}
+Nombre: Juan
+Edad: 30
+Hola, mi nombre es Juan y tengo 30 años.
+\end{verbatim}
+
+\subsection*{Conceptos clave}
+
+\begin{itemize}
+    \item \textbf{Estructuras:} Permiten agrupar datos relacionados y funciones (métodos) que operan sobre esos datos.
+    \item \textbf{Punteros a estructuras:} Facilitan la manipulación dinámica y eficiente de objetos.
+    \item \textbf{Memoria dinámica:} Permite crear objetos cuyo tamaño o existencia se decide en tiempo de ejecución.
+    \item \textbf{Operador \texttt{->}:} Se utiliza para acceder a miembros de un objeto a través de un puntero.
+\end{itemize}
+
+\subsection*{Posibles extensiones}
+
+\begin{itemize}
+    \item Crear más objetos \texttt{Persona} dinámicamente y almacenarlos en un arreglo de punteros.
+    \item Implementar un constructor y destructor en la estructura \texttt{Persona}.
+    \item Añadir más métodos, como cambiar el nombre o la edad.
+    \item Manejar la entrada del usuario para crear objetos con datos personalizados.
+\end{itemize}
+
+
+\newpage
+\section{Ejemplo 13: Implementación básica de una lista enlazada simple}
+
+Este programa crea una lista enlazada dinámica de enteros utilizando punteros y estructuras. Permite agregar nodos al final de la lista, imprimir todos sus elementos y eliminar toda la lista liberando la memoria.
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Lista enlazada simple con operaciones básicas}]
+#include <iostream>
+
+struct Nodo {
+    int valor;
+    Nodo* siguiente;
+};
+
+void agregarNodo(Nodo*& cabeza, int valor) {
+    Nodo* nuevoNodo = new Nodo();
+    nuevoNodo->valor = valor;
+    nuevoNodo->siguiente = nullptr;
+
+    if (cabeza == nullptr) {
+        cabeza = nuevoNodo;
+    } else {
+        Nodo* temp = cabeza;
+        while (temp->siguiente != nullptr) {
+            temp = temp->siguiente;
+        }
+        temp->siguiente = nuevoNodo;
+    }
+}
+
+void imprimirLista(Nodo* cabeza) {
+    Nodo* temp = cabeza;
+    while (temp != nullptr) {
+        std::cout << temp->valor << " -> ";
+        temp = temp->siguiente;
+    }
+    std::cout << "nullptr" << std::endl;
+}
+
+void eliminarLista(Nodo*& cabeza) {
+    Nodo* temp;
+    while (cabeza != nullptr) {
+        temp = cabeza;
+        cabeza = cabeza->siguiente;
+        delete temp;
+    }
+}
+
+int main() {
+    Nodo* lista = nullptr;
+
+    agregarNodo(lista, 10);
+    agregarNodo(lista, 20);
+    agregarNodo(lista, 30);
+
+    std::cout << "Lista enlazada: ";
+    imprimirLista(lista);
+
+    eliminarLista(lista);
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada}
+
+\begin{enumerate}
+    \item \textbf{Estructura Nodo:}
+    \begin{itemize}
+        \item Cada nodo tiene un entero \texttt{valor} y un puntero \texttt{siguiente} que apunta al siguiente nodo de la lista.
+    \end{itemize}
+
+    \item \textbf{Función \texttt{agregarNodo}:}
+    \begin{itemize}
+        \item Crea un nuevo nodo con el valor dado.
+        \item Si la lista está vacía (\texttt{cabeza == nullptr}), asigna el nuevo nodo como cabeza.
+        \item Si no, recorre la lista hasta el último nodo y enlaza el nuevo nodo al final.
+        \item El parámetro \texttt{Nodo*& cabeza} es una referencia a puntero para modificar la cabeza original de la lista.
+    \end{itemize}
+
+    \item \textbf{Función \texttt{imprimirLista}:}
+    \begin{itemize}
+        \item Recorre la lista desde la cabeza hasta el final (\texttt{nullptr}), imprimiendo el valor de cada nodo seguido de una flecha.
+    \end{itemize}
+
+    \item \textbf{Función \texttt{eliminarLista}:}
+    \begin{itemize}
+        \item Recorre la lista liberando cada nodo con \texttt{delete}, evitando fugas de memoria.
+        \item Después de liberar un nodo, avanza la cabeza al siguiente nodo.
+        \item Al finalizar, la cabeza queda en \texttt{nullptr}, indicando lista vacía.
+    \end{itemize}
+
+    \item \textbf{Función \texttt{main}:}
+    \begin{itemize}
+        \item Inicializa la lista vacía con \texttt{nullptr}.
+        \item Agrega tres nodos con valores 10, 20 y 30.
+        \item Imprime la lista.
+        \item Finalmente, elimina la lista y libera la memoria.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Ejemplo de salida}
+
+\begin{verbatim}
+Lista enlazada: 10 -> 20 -> 30 -> nullptr
+\end{verbatim}
+
+\subsection*{Conceptos clave}
+
+\begin{itemize}
+    \item \textbf{Lista enlazada:} estructura dinámica que permite insertar o eliminar elementos fácilmente sin necesidad de mover otros elementos.
+    \item \textbf{Punteros y referencias:} permiten modificar la estructura original y manejar memoria dinámica.
+    \item \textbf{Memoria dinámica:} cada nodo se crea con \texttt{new} y se libera con \texttt{delete} para evitar fugas.
+    \item \textbf{Recorrido:} los ciclos \texttt{while} permiten recorrer la lista hasta encontrar el final (\texttt{nullptr}).
+\end{itemize}
+
+\subsection*{Posibles extensiones}
+
+\begin{itemize}
+    \item Implementar función para eliminar un nodo específico.
+    \item Añadir función para buscar un valor en la lista.
+    \item Crear una lista doblemente enlazada con punteros \texttt{siguiente} y \texttt{anterior}.
+    \item Implementar inserciones en posiciones específicas.
+\end{itemize}
+
+
+\newpage
+\section{Ejemplo 14: Introducción a la Programación Competitiva con C++}
+
+La programación competitiva es una disciplina que combina habilidades de resolución de problemas y codificación eficiente. Los concursantes deben escribir programas que resuelvan problemas algorítmicos dentro de límites de tiempo y memoria establecidos.
+
+Este ejemplo resuelve un problema clásico: encontrar el número máximo en una secuencia de números enteros ingresados por el usuario. Se demuestra la lectura rápida de entrada y el uso de estructuras básicas.
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Lectura eficiente y búsqueda del máximo en una secuencia}]
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+int main() {
+    int n;
+    std::cin >> n; // número de elementos
+
+    std::vector<int> numeros(n);
+    for (int i = 0; i < n; ++i) {
+        std::cin >> numeros[i];
+    }
+
+    int maximo = *std::max_element(numeros.begin(), numeros.end());
+
+    std::cout << "El número máximo es: " << maximo << std::endl;
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada}
+
+\begin{enumerate}
+    \item \textbf{Lectura del tamaño:}
+    \begin{itemize}
+        \item Se lee un entero \texttt{n} que representa la cantidad de números a procesar.
+    \end{itemize}
+
+    \item \textbf{Uso de \texttt{vector}:}
+    \begin{itemize}
+        \item Se utiliza un \texttt{vector<int>} para almacenar dinámicamente los números.
+    \end{itemize}
+
+    \item \textbf{Búsqueda del máximo:}
+    \begin{itemize}
+        \item Se emplea la función estándar \texttt{std::max_element} para encontrar el mayor valor del vector.
+    \end{itemize}
+
+    \item \textbf{Salida del resultado:}
+    \begin{itemize}
+        \item Se imprime el valor máximo encontrado en la secuencia.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Ejemplo de salida}
+
+\begin{verbatim}
+Entrada:
+5
+8 3 14 2 7
+
+Salida:
+El número máximo es: 14
+\end{verbatim}
+
+\subsection*{Conceptos clave}
+
+\begin{itemize}
+    \item \textbf{Programación competitiva:} práctica de resolver problemas algorítmicos contra reloj, común en concursos como ICPC, Codeforces, y otros.
+    \item \textbf{Vectores:} estructuras dinámicas del STL que facilitan el manejo de arreglos con tamaño variable.
+    \item \textbf{Algoritmos estándar:} como \texttt{std::max_element}, optimizan tareas comunes como búsqueda, ordenamiento, etc.
+    \item \textbf{Entrada/Salida rápida:} el uso de \texttt{std::cin} y \texttt{std::cout} permite interacciones rápidas con el sistema de evaluación.
+\end{itemize}
+
+\subsection*{Posibles extensiones}
+
+\begin{itemize}
+    \item Modificar el programa para encontrar el valor mínimo o el promedio.
+    \item Añadir la funcionalidad de imprimir todas las posiciones donde aparece el número máximo.
+    \item Utilizar \texttt{scanf} y \texttt{printf} para acelerar la lectura/escritura.
+    \item Aplicar técnicas de programación competitiva como el uso de estructuras segment tree o binary search en problemas más complejos.
+\end{itemize}
+
+
+\newpage
+\section{Ejemplo 15: Implementación y uso básico de una Pila (Stack)}
+
+Una pila es una estructura de datos lineal que sigue el principio LIFO (Last In, First Out). El último elemento que se inserta es el primero en salir. Se utiliza frecuentemente en algoritmos de retroceso (backtracking), evaluación de expresiones, y manejo de llamadas recursivas.
+
+Este ejemplo implementa una pila simple de enteros utilizando la biblioteca estándar de C++ (\texttt{std::stack}).
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Uso de pila con operaciones básicas}]
+#include <iostream>
+#include <stack>
+
+int main() {
+    std::stack<int> pila;
+
+    // Insertar elementos
+    pila.push(10);
+    pila.push(20);
+    pila.push(30);
+
+    std::cout << "Elemento en la cima: " << pila.top() << std::endl;
+
+    // Eliminar elementos
+    pila.pop();
+
+    std::cout << "Después de hacer pop, cima: " << pila.top() << std::endl;
+
+    // Vaciar la pila
+    while (!pila.empty()) {
+        std::cout << "Eliminando: " << pila.top() << std::endl;
+        pila.pop();
+    }
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada}
+
+\begin{enumerate}
+    \item \textbf{Inclusión de bibliotecas:}
+    \begin{itemize}
+        \item \texttt{\#include <iostream>}: Permite usar funciones de entrada/salida como \texttt{std::cout}.
+        \item \texttt{\#include <stack>}: Incluye la estructura de datos \texttt{stack} de la STL.
+    \end{itemize}
+
+    \item \textbf{Creación de la pila:}
+    \begin{itemize}
+        \item \texttt{std::stack<int> pila;} crea una pila vacía de enteros.
+    \end{itemize}
+
+    \item \textbf{Operaciones de inserción (\texttt{push}):}
+    \begin{itemize}
+        \item \texttt{pila.push(10);} inserta el número 10.
+        \item \texttt{pila.push(20);} y luego 20.
+        \item \texttt{pila.push(30);} por último, se inserta 30, que queda en la cima.
+    \end{itemize}
+
+    \item \textbf{Acceso al elemento superior (\texttt{top}):}
+    \begin{itemize}
+        \item \texttt{pila.top()} devuelve el último elemento insertado sin eliminarlo (en este caso, 30).
+    \end{itemize}
+
+    \item \textbf{Eliminación de elementos (\texttt{pop}):}
+    \begin{itemize}
+        \item \texttt{pila.pop();} elimina el elemento de la cima (30).
+        \item Luego, la cima pasa a ser 20.
+    \end{itemize}
+
+    \item \textbf{Recorrido para vaciar la pila:}
+    \begin{itemize}
+        \item El ciclo \texttt{while (!pila.empty())} se repite hasta que la pila esté vacía.
+        \item Dentro del ciclo, se imprime el elemento de la cima y luego se elimina con \texttt{pop()}.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Ejemplo de salida}
+
+\begin{verbatim}
+Elemento en la cima: 30
+Después de hacer pop, cima: 20
+Eliminando: 20
+Eliminando: 10
+\end{verbatim}
+
+\subsection*{Conceptos clave}
+
+\begin{itemize}
+    \item \textbf{Pila (Stack):} estructura de datos LIFO donde solo se puede acceder al último elemento insertado.
+    \item \textbf{STL:} la pila es parte de la biblioteca estándar de C++ y ofrece una interfaz sencilla y eficiente.
+    \item \textbf{Aplicaciones:} se usa en la evaluación de expresiones, control de llamadas recursivas, recorridos de árboles, entre otros.
+    \item \textbf{Uso de ciclos:} el bucle \texttt{while} permite vaciar la pila completamente.
+\end{itemize}
+
+\subsection*{Posibles extensiones}
+
+\begin{itemize}
+    \item Implementar una pila manualmente usando listas enlazadas o arreglos dinámicos.
+    \item Usar la pila para verificar si una expresión tiene paréntesis balanceados.
+    \item Aplicar pilas para invertir cadenas de texto.
+    \item Implementar la conversión de notación infija a postfija.
+\end{itemize}
+
+\newpage
+\section{Ejemplo 16: Implementación y uso básico de una Cola (Queue)}
+
+Una cola es una estructura de datos lineal que sigue el principio FIFO (First In, First Out). El primer elemento en entrar es el primero en salir. Se usa comúnmente en sistemas de impresión, manejo de procesos, y simulaciones de atención por turnos.
+
+Este ejemplo muestra cómo utilizar una cola de enteros usando la biblioteca estándar de C++ (\texttt{std::queue}).
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Uso de cola con operaciones básicas}]
+#include <iostream>
+#include <queue>
+
+int main() {
+    std::queue<int> cola;
+
+    // Insertar elementos en la cola
+    cola.push(100);
+    cola.push(200);
+    cola.push(300);
+
+    std::cout << "Elemento al frente: " << cola.front() << std::endl;
+    std::cout << "Elemento al final: " << cola.back() << std::endl;
+
+    // Eliminar elementos uno por uno
+    while (!cola.empty()) {
+        std::cout << "Atendiendo: " << cola.front() << std::endl;
+        cola.pop();
+    }
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada}
+
+\begin{enumerate}
+    \item \textbf{Inclusión de bibliotecas:}
+    \begin{itemize}
+        \item \texttt{\#include <queue>}: Permite utilizar colas mediante la STL.
+        \item \texttt{\#include <iostream>}: Para entrada/salida estándar.
+    \end{itemize}
+
+    \item \textbf{Creación de la cola:}
+    \begin{itemize}
+        \item \texttt{std::queue<int> cola;} declara una cola de enteros vacía.
+    \end{itemize}
+
+    \item \textbf{Operaciones \texttt{push}, \texttt{front}, \texttt{back}:}
+    \begin{itemize}
+        \item \texttt{push(valor)} inserta elementos al final de la cola.
+        \item \texttt{front()} devuelve el primer elemento (el que será atendido).
+        \item \texttt{back()} devuelve el último elemento insertado.
+    \end{itemize}
+
+    \item \textbf{Eliminación de elementos (\texttt{pop}):}
+    \begin{itemize}
+        \item \texttt{pop()} elimina el elemento que está al frente de la cola.
+        \item Se usa un bucle \texttt{while} para vaciar la cola mientras se imprimen los elementos en orden.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Ejemplo de salida}
+
+\begin{verbatim}
+Elemento al frente: 100
+Elemento al final: 300
+Atendiendo: 100
+Atendiendo: 200
+Atendiendo: 300
+\end{verbatim}
+
+\subsection*{Conceptos clave}
+
+\begin{itemize}
+    \item \textbf{Cola (Queue):} estructura de datos FIFO donde el primer elemento en entrar es el primero en salir.
+    \item \textbf{STL:} facilita el uso de estructuras eficientes como \texttt{queue}.
+    \item \textbf{Aplicaciones típicas:} atención por turnos, planificación de procesos, colas de impresión.
+    \item \textbf{Recorrido:} mediante un ciclo \texttt{while}, se procesan los elementos hasta que la cola queda vacía.
+\end{itemize}
+
+\subsection*{Posibles extensiones}
+
+\begin{itemize}
+    \item Implementar una cola manualmente con listas enlazadas.
+    \item Usar una cola para simular un sistema de turnos o fila en un banco.
+    \item Implementar una cola de prioridad (\texttt{priority\_queue}).
+    \item Simular múltiples colas para diferentes niveles de atención.
+\end{itemize}
+
+\newpage
+\section{Ejemplo 17: Implementación de un Árbol Binario Simple}
+
+Un árbol binario es una estructura jerárquica donde cada nodo tiene como máximo dos hijos: uno izquierdo y uno derecho. Es útil para organizar datos jerárquicos, realizar búsquedas, ordenar información, y se utiliza como base para estructuras más complejas como árboles binarios de búsqueda o heaps.
+
+Este ejemplo muestra cómo crear un árbol binario simple, insertar nodos y recorrerlo en orden (in-order traversal).
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Árbol binario simple con recorrido inorden}]
+#include <iostream>
+
+struct Nodo {
+    int valor;
+    Nodo* izquierda;
+    Nodo* derecha;
+};
+
+// Crear nuevo nodo
+Nodo* crearNodo(int valor) {
+    Nodo* nuevo = new Nodo();
+    nuevo->valor = valor;
+    nuevo->izquierda = nullptr;
+    nuevo->derecha = nullptr;
+    return nuevo;
+}
+
+// Recorrido inorden (izquierda - raíz - derecha)
+void inOrden(Nodo* raiz) {
+    if (raiz != nullptr) {
+        inOrden(raiz->izquierda);
+        std::cout << raiz->valor << " ";
+        inOrden(raiz->derecha);
+    }
+}
+
+int main() {
+    // Crear nodos manualmente
+    Nodo* raiz = crearNodo(10);
+    raiz->izquierda = crearNodo(5);
+    raiz->derecha = crearNodo(15);
+    raiz->izquierda->izquierda = crearNodo(2);
+    raiz->izquierda->derecha = crearNodo(7);
+
+    std::cout << "Recorrido inorden del árbol: ";
+    inOrden(raiz);
+    std::cout << std::endl;
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada}
+
+\begin{enumerate}
+    \item \textbf{Estructura \texttt{Nodo}:}
+    \begin{itemize}
+        \item Cada nodo contiene un valor entero y dos punteros: \texttt{izquierda} y \texttt{derecha}, que apuntan a sus hijos.
+    \end{itemize}
+
+    \item \textbf{Función \texttt{crearNodo}:}
+    \begin{itemize}
+        \item Reserva memoria dinámica para un nuevo nodo y lo inicializa con el valor dado.
+        \item Sus hijos se establecen como \texttt{nullptr} inicialmente.
+    \end{itemize}
+
+    \item \textbf{Función \texttt{inOrden}:}
+    \begin{itemize}
+        \item Realiza un recorrido inorden (Left - Root - Right).
+        \item Imprime los valores del árbol en orden ascendente si es un árbol binario de búsqueda.
+    \end{itemize}
+
+    \item \textbf{Función \texttt{main}:}
+    \begin{itemize}
+        \item Se crea un árbol manualmente insertando nodos con valores: 10 (raíz), 5 y 15 como hijos, y luego 2 y 7 como nietos.
+        \item Se realiza el recorrido inorden y se imprime el resultado.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Ejemplo de salida}
+
+\begin{verbatim}
+Recorrido inorden del árbol: 2 5 7 10 15
+\end{verbatim}
+
+\subsection*{Conceptos clave}
+
+\begin{itemize}
+    \item \textbf{Árbol binario:} estructura jerárquica donde cada nodo tiene hasta dos hijos.
+    \item \textbf{Nodo:} unidad básica del árbol que contiene un valor y punteros a sus hijos izquierdo y derecho.
+    \item \textbf{Recorrido inorden:} visita el subárbol izquierdo, luego la raíz, y luego el subárbol derecho.
+    \item \textbf{Recursividad:} técnica utilizada para recorrer árboles de forma natural.
+\end{itemize}
+
+\subsection*{Posibles extensiones}
+
+\begin{itemize}
+    \item Implementar inserción automática para un árbol binario de búsqueda (BST).
+    \item Agregar recorridos preorden y postorden.
+    \item Implementar una función para calcular la altura del árbol.
+    \item Crear una función para contar el número de nodos.
+    \item Dibujar el árbol con TikZ para visualizar su estructura.
+\end{itemize}
+\newpage
+\section{Ejemplo 18: Árboles Balanceados (AVL)}
+
+Un árbol balanceado es un árbol binario de búsqueda (BST) que mantiene su altura equilibrada automáticamente. El más conocido es el árbol AVL, donde la diferencia de alturas entre los subárboles izquierdo y derecho de cualquier nodo no puede ser mayor que uno.
+
+Los árboles AVL son útiles cuando se requieren operaciones de inserción, eliminación y búsqueda en tiempo logarítmico garantizado.
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Implementación básica de un árbol AVL (balanceado)}]
+#include <iostream>
+#include <algorithm>
+
+struct Nodo {
+    int valor;
+    Nodo* izquierda;
+    Nodo* derecha;
+    int altura;
+};
+
+int altura(Nodo* n) {
+    return n ? n->altura : 0;
+}
+
+int factorBalance(Nodo* n) {
+    return altura(n->izquierda) - altura(n->derecha);
+}
+
+Nodo* crearNodo(int valor) {
+    Nodo* nuevo = new Nodo();
+    nuevo->valor = valor;
+    nuevo->izquierda = nullptr;
+    nuevo->derecha = nullptr;
+    nuevo->altura = 1;
+    return nuevo;
+}
+
+Nodo* rotarDerecha(Nodo* y) {
+    Nodo* x = y->izquierda;
+    Nodo* T2 = x->derecha;
+
+    x->derecha = y;
+    y->izquierda = T2;
+
+    y->altura = std::max(altura(y->izquierda), altura(y->derecha)) + 1;
+    x->altura = std::max(altura(x->izquierda), altura(x->derecha)) + 1;
+
+    return x;
+}
+
+Nodo* rotarIzquierda(Nodo* x) {
+    Nodo* y = x->derecha;
+    Nodo* T2 = y->izquierda;
+
+    y->izquierda = x;
+    x->derecha = T2;
+
+    x->altura = std::max(altura(x->izquierda), altura(x->derecha)) + 1;
+    y->altura = std::max(altura(y->izquierda), altura(y->derecha)) + 1;
+
+    return y;
+}
+
+Nodo* insertarAVL(Nodo* nodo, int valor) {
+    if (!nodo) return crearNodo(valor);
+
+    if (valor < nodo->valor)
+        nodo->izquierda = insertarAVL(nodo->izquierda, valor);
+    else if (valor > nodo->valor)
+        nodo->derecha = insertarAVL(nodo->derecha, valor);
+    else
+        return nodo; // no se permiten duplicados
+
+    nodo->altura = 1 + std::max(altura(nodo->izquierda), altura(nodo->derecha));
+    int balance = factorBalance(nodo);
+
+    // Rotaciones según el caso de desbalance
+    if (balance > 1 && valor < nodo->izquierda->valor)
+        return rotarDerecha(nodo);
+    if (balance < -1 && valor > nodo->derecha->valor)
+        return rotarIzquierda(nodo);
+    if (balance > 1 && valor > nodo->izquierda->valor) {
+        nodo->izquierda = rotarIzquierda(nodo->izquierda);
+        return rotarDerecha(nodo);
+    }
+    if (balance < -1 && valor < nodo->derecha->valor) {
+        nodo->derecha = rotarDerecha(nodo->derecha);
+        return rotarIzquierda(nodo);
+    }
+
+    return nodo;
+}
+
+void inOrden(Nodo* raiz) {
+    if (raiz) {
+        inOrden(raiz->izquierda);
+        std::cout << raiz->valor << " ";
+        inOrden(raiz->derecha);
+    }
+}
+
+int main() {
+    Nodo* raiz = nullptr;
+
+    raiz = insertarAVL(raiz, 30);
+    raiz = insertarAVL(raiz, 20);
+    raiz = insertarAVL(raiz, 10);
+    raiz = insertarAVL(raiz, 25);
+    raiz = insertarAVL(raiz, 40);
+    raiz = insertarAVL(raiz, 50);
+
+    std::cout << "Recorrido inorden del árbol AVL: ";
+    inOrden(raiz);
+    std::cout << std::endl;
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación detallada}
+
+\begin{enumerate}
+    \item \textbf{Estructura \texttt{Nodo}:}
+    \begin{itemize}
+        \item Contiene un valor entero, punteros a sus hijos izquierdo y derecho, y su altura.
+    \end{itemize}
+
+    \item \textbf{Altura y balance:}
+    \begin{itemize}
+        \item \texttt{altura()} devuelve la altura de un nodo.
+        \item \texttt{factorBalance()} calcula la diferencia de alturas entre los hijos.
+    \end{itemize}
+
+    \item \textbf{Rotaciones:}
+    \begin{itemize}
+        \item \texttt{rotarDerecha()} y \texttt{rotarIzquierda()} son necesarias para mantener el equilibrio.
+        \item Se aplican según el tipo de desbalance (izquierda-izquierda, derecha-derecha, izquierda-derecha, derecha-izquierda).
+    \end{itemize}
+
+    \item \textbf{Inserción balanceada:}
+    \begin{itemize}
+        \item \texttt{insertarAVL()} inserta un nuevo valor y ajusta el árbol mediante rotaciones si es necesario.
+    \end{itemize}
+
+    \item \textbf{Recorrido inorden:}
+    \begin{itemize}
+        \item Imprime los valores en orden creciente.
+    \end{itemize}
+\end{enumerate}
+
+\subsection*{Ejemplo de salida}
+
+\begin{verbatim}
+Recorrido inorden del árbol AVL: 10 20 25 30 40 50
+\end{verbatim}
+
+\subsection*{Conceptos clave}
+
+\begin{itemize}
+    \item \textbf{Árbol AVL:} árbol binario de búsqueda que se balancea automáticamente para mantener operaciones eficientes.
+    \item \textbf{Rotaciones:} operaciones locales que reestructuran el árbol para mantener su equilibrio.
+    \item \textbf{Altura y balanceo:} cada nodo almacena su altura y se ajusta tras cada inserción.
+    \item \textbf{Tiempo logarítmico:} las operaciones de inserción, eliminación y búsqueda se mantienen en \texttt{O(log n)}.
+\end{itemize}
+
+\subsection*{Posibles extensiones}
+
+\begin{itemize}
+    \item Implementar eliminación de nodos en un árbol AVL.
+    \item Agregar recorridos preorden y postorden.
+    \item Dibujar el árbol AVL con TikZ.
+    \item Comparar AVL con otros árboles balanceados como Red-Black Tree o Splay Tree.
+\end{itemize}
+
+\newpage
+\section{Ejemplo 19: Árboles B y Árboles B+}
+
+Los árboles B y B+ son estructuras de datos auto-balanceadas utilizadas comúnmente en sistemas de bases de datos y sistemas de archivos. Permiten búsquedas, inserciones y eliminaciones eficientes manteniendo los datos ordenados y balanceados en nodos de múltiples hijos.
+
+\begin{itemize}
+    \item \textbf{Árbol B:} Todos los nodos internos pueden tener múltiples claves e hijos. Las hojas contienen los datos.
+    \item \textbf{Árbol B+:} Solo las hojas contienen los datos completos; los nodos internos actúan como índices. Las hojas están enlazadas.
+\end{itemize}
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Implementación básica de inserción en Árbol B}]
+#include <iostream>
+#include <vector>
+#include <algorithm>
+using namespace std;
+
+const int T = 3; // Grado mínimo del árbol B
+
+struct NodoB {
+    vector<int> claves;
+    vector<NodoB*> hijos;
+    bool hoja = true;
+
+    void insertarNoLleno(int clave);
+    void dividirHijo(int i);
+};
+
+class ArbolB {
+public:
+    NodoB* raiz = new NodoB();
+
+    void insertar(int clave) {
+        if (raiz->claves.size() == 2 * T - 1) {
+            NodoB* nuevaRaiz = new NodoB();
+            nuevaRaiz->hoja = false;
+            nuevaRaiz->hijos.push_back(raiz);
+            nuevaRaiz->dividirHijo(0);
+            raiz = nuevaRaiz;
+        }
+        raiz->insertarNoLleno(clave);
+    }
+
+    void imprimir(NodoB* nodo, int nivel = 0) {
+        if (!nodo) return;
+        for (int i = nodo->claves.size() - 1; i >= 0; i--)
+            if (!nodo->hoja) imprimir(nodo->hijos[i + 1], nivel + 1);
+        for (int k : nodo->claves)
+            cout << string(nivel * 4, ' ') << k << endl;
+        if (!nodo->hoja) imprimir(nodo->hijos[0], nivel + 1);
+    }
+
+    void imprimir() {
+        imprimir(raiz);
+    }
+};
+
+void NodoB::insertarNoLleno(int clave) {
+    int i = claves.size() - 1;
+    if (hoja) {
+        claves.push_back(0);
+        while (i >= 0 && clave < claves[i]) {
+            claves[i + 1] = claves[i];
+            i--;
+        }
+        claves[i + 1] = clave;
+    } else {
+        while (i >= 0 && clave < claves[i]) i--;
+        i++;
+        if (hijos[i]->claves.size() == 2 * T - 1) {
+            dividirHijo(i);
+            if (clave > claves[i]) i++;
+        }
+        hijos[i]->insertarNoLleno(clave);
+    }
+}
+
+void NodoB::dividirHijo(int i) {
+    NodoB* y = hijos[i];
+    NodoB* z = new NodoB();
+    z->hoja = y->hoja;
+
+    for (int j = 0; j < T - 1; j++)
+        z->claves.push_back(y->claves[j + T]);
+
+    if (!y->hoja)
+        for (int j = 0; j < T; j++)
+            z->hijos.push_back(y->hijos[j + T]);
+
+    y->claves.resize(T - 1);
+    if (!y->hoja) y->hijos.resize(T);
+
+    hijos.insert(hijos.begin() + i + 1, z);
+    claves.insert(claves.begin() + i, y->claves[T - 1]);
+}
+\end{lstlisting}
+
+\subsection*{Explicación del código}
+
+\begin{itemize}
+    \item Se define un \texttt{NodoB} que almacena claves y punteros a hijos.
+    \item El árbol tiene un grado mínimo \( T \) que define cuántas claves puede contener un nodo.
+    \item Si un nodo está lleno (2T-1 claves), se divide en dos y se mueve una clave al nodo padre.
+    \item La función \texttt{insertar()} gestiona la raíz y llama a \texttt{insertarNoLleno()}.
+\end{itemize}
+
+\subsection*{Salida de ejemplo esperada}
+
+\begin{verbatim}
+30
+    10
+        5
+        15
+    50
+        40
+        60
+\end{verbatim}
+
+(Esta estructura dependerá de las claves insertadas)
+
+\subsection*{Diferencias entre Árbol B y Árbol B+}
+
+\begin{itemize}
+    \item En el \textbf{Árbol B}, los datos pueden estar en nodos internos y hojas.
+    \item En el \textbf{Árbol B+}, los datos sólo están en las hojas, y las hojas están conectadas como una lista enlazada para facilitar recorridos secuenciales.
+    \item El Árbol B+ es más eficiente para búsquedas en grandes volúmenes de datos.
+\end{itemize}
+
+\subsection*{Conceptos clave}
+
+\begin{itemize}
+    \item \textbf{Grado mínimo (T):} Define cuántas claves puede contener un nodo como mínimo o máximo.
+    \item \textbf{Balance automático:} El árbol se ajusta automáticamente durante inserciones o eliminaciones.
+    \item \textbf{Árbol B+:} Mejora los recorridos secuenciales y se utiliza en bases de datos.
+\end{itemize}
+
+\subsection*{Posibles extensiones}
+
+\begin{itemize}
+    \item Implementar eliminación en Árbol B.
+    \item Implementar Árbol B+ completo con hojas enlazadas.
+    \item Usar B+ para simular una base de datos indexada.
+    \item Visualizar con TikZ.
+\end{itemize}
+
+
+\newpage
+\section{Ejemplo 21: Árboles Heap (Montículos)}
+
+Un \textbf{árbol Heap} o \textbf{montículo} es una estructura de datos basada en árboles binarios completos que satisface la propiedad de heap:
+
+\begin{itemize}
+    \item En un \textbf{Max-Heap}, el valor del nodo padre es siempre mayor o igual que el de sus hijos.
+    \item En un \textbf{Min-Heap}, el valor del nodo padre es menor o igual que el de sus hijos.
+\end{itemize}
+
+Los heaps se utilizan comúnmente para implementar colas de prioridad y en algoritmos como Heapsort.
+
+\subsection*{Código fuente}
+
+\begin{lstlisting}[caption={Heap Máximo con inserción y eliminación}]
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class MaxHeap {
+    vector<int> heap;
+
+    void heapifyUp(int i) {
+        while (i != 0 && heap[i] > heap[(i - 1) / 2]) {
+            swap(heap[i], heap[(i - 1) / 2]);
+            i = (i - 1) / 2;
+        }
+    }
+
+    void heapifyDown(int i) {
+        int n = heap.size();
+        while (2 * i + 1 < n) {
+            int mayor = 2 * i + 1;
+            if (mayor + 1 < n && heap[mayor + 1] > heap[mayor])
+                mayor++;
+            if (heap[i] >= heap[mayor])
+                break;
+            swap(heap[i], heap[mayor]);
+            i = mayor;
+        }
+    }
+
+public:
+    void insertar(int valor) {
+        heap.push_back(valor);
+        heapifyUp(heap.size() - 1);
+    }
+
+    void eliminar() {
+        if (heap.empty()) return;
+        heap[0] = heap.back();
+        heap.pop_back();
+        heapifyDown(0);
+    }
+
+    void mostrar() {
+        for (int val : heap)
+            cout << val << " ";
+        cout << endl;
+    }
+};
+
+int main() {
+    MaxHeap h;
+    h.insertar(10);
+    h.insertar(40);
+    h.insertar(30);
+    h.insertar(20);
+
+    cout << "Heap actual: ";
+    h.mostrar();
+
+    h.eliminar();
+    cout << "Después de eliminar la raíz: ";
+    h.mostrar();
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación del código}
+
+\begin{itemize}
+    \item \texttt{insertar(valor)} añade un elemento y luego aplica \texttt{heapifyUp} para mantener la propiedad del heap.
+    \item \texttt{eliminar()} quita la raíz (el valor máximo), reemplaza por el último y reorganiza con \texttt{heapifyDown}.
+    \item El arreglo \texttt{heap} simula el árbol binario.
+\end{itemize}
+
+\subsection*{Salida de ejemplo esperada}
+
+\begin{verbatim}
+Heap actual: 40 20 30 10
+Después de eliminar la raíz: 30 20 10
+\end{verbatim}
+
+\subsection*{Conceptos clave}
+
+\begin{itemize}
+    \item \textbf{Propiedad de Heap:} Cada padre es mayor (o menor) que sus hijos.
+    \item \textbf{Heap completo:} Se llena nivel por nivel, de izquierda a derecha.
+    \item \textbf{heapifyUp / heapifyDown:} Permiten mantener la estructura tras insertar o eliminar.
+    \item \textbf{Implementación en arreglos:} Sin necesidad de punteros ni nodos.
+\end{itemize}
+
+\subsection*{Posibles extensiones}
+
+\begin{itemize}
+    \item Implementar Min-Heap.
+    \item Aplicar Heapsort para ordenar un arreglo.
+    \item Usar una cola de prioridad con un Heap.
+    \item Visualizar con TikZ el árbol completo.
+\end{itemize}
+
+
+\newpage
+\section{Ejemplo 22: Árboles Rojo-Negro}
+
+Un \textbf{Árbol Rojo-Negro} es un tipo de árbol binario de búsqueda auto-balanceado que garantiza operaciones eficientes en tiempo \texttt{O(log n)}.
+
+\subsection*{Propiedades de los árboles Rojo-Negro}
+
+\begin{itemize}
+    \item Cada nodo es rojo o negro.
+    \item La raíz siempre es negra.
+    \item No puede haber dos nodos rojos consecutivos.
+    \item Toda ruta desde un nodo a sus hojas nulas contiene el mismo número de nodos negros.
+    \item Las hojas son nodos nulos (representados como punteros \texttt{nullptr} negros).
+\end{itemize}
+
+Estas reglas permiten mantener el balance sin necesidad de rebalanceo agresivo.
+
+\subsection*{Código fuente (inserción en un árbol Rojo-Negro)}
+
+\begin{lstlisting}[caption={Implementación básica de árbol Rojo-Negro (inserción)}]
+#include <iostream>
+using namespace std;
+
+enum Color { ROJO, NEGRO };
+
+struct Nodo {
+    int dato;
+    bool color;
+    Nodo *izq, *der, *padre;
+
+    Nodo(int d) : dato(d), color(ROJO), izq(nullptr), der(nullptr), padre(nullptr) {}
+};
+
+class ArbolRN {
+private:
+    Nodo* raiz;
+
+    void rotacionIzquierda(Nodo* &x) {
+        Nodo* y = x->der;
+        x->der = y->izq;
+        if (y->izq != nullptr)
+            y->izq->padre = x;
+        y->padre = x->padre;
+        if (x->padre == nullptr)
+            raiz = y;
+        else if (x == x->padre->izq)
+            x->padre->izq = y;
+        else
+            x->padre->der = y;
+        y->izq = x;
+        x->padre = y;
+    }
+
+    void rotacionDerecha(Nodo* &x) {
+        Nodo* y = x->izq;
+        x->izq = y->der;
+        if (y->der != nullptr)
+            y->der->padre = x;
+        y->padre = x->padre;
+        if (x->padre == nullptr)
+            raiz = y;
+        else if (x == x->padre->der)
+            x->padre->der = y;
+        else
+            x->padre->izq = y;
+        y->der = x;
+        x->padre = y;
+    }
+
+    void arreglarInsercion(Nodo* &z) {
+        while (z->padre != nullptr && z->padre->color == ROJO) {
+            Nodo* abuelo = z->padre->padre;
+            if (z->padre == abuelo->izq) {
+                Nodo* tio = abuelo->der;
+                if (tio != nullptr && tio->color == ROJO) {
+                    z->padre->color = NEGRO;
+                    tio->color = NEGRO;
+                    abuelo->color = ROJO;
+                    z = abuelo;
+                } else {
+                    if (z == z->padre->der) {
+                        z = z->padre;
+                        rotacionIzquierda(z);
+                    }
+                    z->padre->color = NEGRO;
+                    abuelo->color = ROJO;
+                    rotacionDerecha(abuelo);
+                }
+            } else {
+                Nodo* tio = abuelo->izq;
+                if (tio != nullptr && tio->color == ROJO) {
+                    z->padre->color = NEGRO;
+                    tio->color = NEGRO;
+                    abuelo->color = ROJO;
+                    z = abuelo;
+                } else {
+                    if (z == z->padre->izq) {
+                        z = z->padre;
+                        rotacionDerecha(z);
+                    }
+                    z->padre->color = NEGRO;
+                    abuelo->color = ROJO;
+                    rotacionIzquierda(abuelo);
+                }
+            }
+        }
+        raiz->color = NEGRO;
+    }
+
+public:
+    ArbolRN() : raiz(nullptr) {}
+
+    void insertar(int dato) {
+        Nodo* nuevo = new Nodo(dato);
+        Nodo* y = nullptr;
+        Nodo* x = raiz;
+
+        while (x != nullptr) {
+            y = x;
+            if (nuevo->dato < x->dato)
+                x = x->izq;
+            else
+                x = x->der;
+        }
+
+        nuevo->padre = y;
+        if (y == nullptr)
+            raiz = nuevo;
+        else if (nuevo->dato < y->dato)
+            y->izq = nuevo;
+        else
+            y->der = nuevo;
+
+        arreglarInsercion(nuevo);
+    }
+
+    void inOrden(Nodo* nodo) {
+        if (nodo == nullptr) return;
+        inOrden(nodo->izq);
+        cout << nodo->dato << (nodo->color == ROJO ? "(R) " : "(N) ");
+        inOrden(nodo->der);
+    }
+
+    void mostrar() {
+        inOrden(raiz);
+        cout << endl;
+    }
+};
+
+int main() {
+    ArbolRN arbol;
+    arbol.insertar(10);
+    arbol.insertar(20);
+    arbol.insertar(30);
+    arbol.insertar(15);
+
+    cout << "Árbol Rojo-Negro (inorden): ";
+    arbol.mostrar();
+
+    return 0;
+}
+\end{lstlisting}
+
+\subsection*{Explicación del código}
+
+\begin{itemize}
+    \item Cada nodo nuevo se inserta como rojo.
+    \item Se aplican rotaciones y recoloreos en \texttt{arreglarInsercion} para mantener las propiedades Rojo-Negro.
+    \item Las rotaciones izquierda/derecha ajustan la estructura del árbol cuando se violan las reglas.
+    \item \texttt{mostrar()} imprime en inorden, marcando si un nodo es rojo (R) o negro (N).
+\end{itemize}
+
+\subsection*{Ejemplo de salida}
+
+\begin{verbatim}
+Árbol Rojo-Negro (inorden): 10(N) 15(R) 20(N) 30(R)
+\end{verbatim}
+
+\subsection*{Conceptos clave}
+
+\begin{itemize}
+    \item \textbf{Balance automático:} mantiene profundidad logarítmica.
+    \item \textbf{Rotaciones:} corrigen desequilibrios tras inserciones.
+    \item \textbf{Colores:} ayudan a mantener balance con poca reestructuración.
+    \item \textbf{Uso práctico:} bases de datos, kernels de sistemas operativos (como Linux).
+\end{itemize}
+
+\subsection*{Posibles extensiones}
+
+\begin{itemize}
+    \item Implementar eliminación de nodos con rebalanceo.
+    \item Añadir función de búsqueda por clave.
+    \item Visualizar el árbol con TikZ.
+    \item Comparar con árboles AVL.
+\end{itemize}
+
+\end{document}
